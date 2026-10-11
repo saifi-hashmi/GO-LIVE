@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Optometrists — Clifton Vision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* =============================================
+     DESIGN TOKENS — identical to main site
+  ============================================= */
+  :root {
+    --navy:       #0d1b2e;
+    --navy-mid:   #152540;
+    --navy-light: #1e3454;
+    --gold:       #c9a84c;
+    --gold-light: #e2c47a;
+    --cream:      #f5f0e8;
+    --white:      #ffffff;
+    --text-muted: #8a9bb5;
+    --border:     rgba(201,168,76,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body { font-family: 'Jost', sans-serif; background: var(--navy); color: var(--cream); overflow-x: hidden; }
+
+  /* =============================================
+     NAV — mirrors main site exactly
+  ============================================= */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13,27,46,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--white); letter-spacing: .06em;
+  }
+  .nav-logo-text span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-muted);
+    font-size: .95rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase;
+    transition: color .25s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--gold); }
+  .nav-cta {
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold) !important; padding: .65rem 1.6rem;
+    border-radius: 2px; transition: all .25s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+  /* =============================================
+     PAGE HERO BANNER
+  ============================================= */
+  #page-hero {
+    min-height: 42vh;
+    display: flex; align-items: flex-end;
+    padding: 9rem 5% 4rem;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #0d1b2e 0%, #152540 60%, #0d1b2e 100%);
+  }
+  #page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, rgba(201,168,76,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(21,37,64,.8) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero-grid {
+    position: absolute; inset: 0; opacity: .04;
+    background-image:
+      linear-gradient(var(--gold) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-hero-content { position: relative; z-index: 1; }
+  .page-eyebrow {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem;
+  }
+  .page-eyebrow span {
+    font-size: .85rem; font-weight: 400;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow-line { width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+  .page-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300; color: var(--white);
+    line-height: 1.05; letter-spacing: -.01em;
+  }
+  .page-h1 em { font-style: italic; color: var(--gold-light); }
+  .page-sub {
+    font-size: 1.05rem; font-weight: 300;
+    color: var(--text-muted); margin-top: 1rem;
+    max-width: 520px; line-height: 1.8;
+  }
+
+  /* =============================================
+     TEAM SECTION
+  ============================================= */
+  #team {
+    padding: 6rem 5%;
+    background: var(--navy);
+  }
+
+  .section-label {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem;
+  }
+  .section-label span {
+    font-size: .82rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--gold); font-weight: 400;
+  }
+  .section-label .line { width: 32px; height: 1px; background: var(--gold); opacity: .5; }
+
+  /* Profile card grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+  }
+
+  /* Individual profile card */
+  .profile-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color .3s, transform .25s;
+  }
+  .profile-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .profile-card:hover { border-color: rgba(201,168,76,.5); transform: translateY(-4px); }
+  .profile-card:hover::before { opacity: 1; }
+
+  /* Photo area */
+  .profile-photo-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--navy-light);
+  }
+  .profile-photo-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .profile-card:hover .profile-photo-wrap img { transform: scale(1.04); }
+
+  /* Gold overlay ribbon */
+  .profile-role-ribbon {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(13,27,46,.92) 0%, transparent 100%);
+    padding: 1.2rem 1.4rem .8rem;
+  }
+  .profile-role-ribbon span {
+    font-size: .78rem; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Card body */
+  .profile-body { padding: 1.8rem 2rem 2rem; }
+
+  .profile-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; font-weight: 400;
+    color: var(--white); line-height: 1.1;
+    margin-bottom: .3rem;
+  }
+  .profile-title {
+    font-size: .88rem; font-weight: 400;
+    color: var(--gold-light); letter-spacing: .1em;
+    text-transform: uppercase; margin-bottom: 1.3rem;
+  }
+  .profile-divider {
+    width: 36px; height: 1px;
+    background: var(--gold); opacity: .4;
+    margin-bottom: 1.3rem;
+  }
+  .profile-bio {
+    font-size: .98rem; font-weight: 300;
+    line-height: 1.85; color: var(--text-muted);
+    margin-bottom: 1.6rem;
+  }
+
+  /* Credentials / tags */
+  .profile-credentials {
+    display: flex; flex-wrap: wrap; gap: .55rem;
+    margin-bottom: 1.8rem;
+  }
+  .credential-tag {
+    display: inline-block;
+    background: rgba(201,168,76,.1);
+    border: 1px solid rgba(201,168,76,.25);
+    color: var(--gold-light);
+    font-size: .75rem; font-weight: 400;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: .3rem .8rem; border-radius: 100px;
+  }
+
+  /* Specialisms list */
+  .profile-specialisms { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.8rem; }
+  .profile-specialisms li {
+    display: flex; align-items: center; gap: .75rem;
+    font-size: .95rem; font-weight: 300; color: var(--text-muted);
+  }
+  .profile-specialisms li::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0; opacity: .7;
+  }
+
+  /* Contact row */
+  .profile-contact-row {
+    display: flex; gap: .8rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); border: none; cursor: pointer;
+    padding: .85rem 1.8rem;
+    font-family: 'Jost', sans-serif; font-size: .9rem;
+    font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    border-radius: 2px; text-decoration: none; display: inline-block;
+    transition: opacity .25s, transform .2s;
+  }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--cream);
+    border: 1px solid rgba(245,240,232,.2); cursor: pointer;
+    padding: .85rem 1.8rem;
+    font-family: 'Jost', sans-serif; font-size: .9rem;
+    font-weight: 300; letter-spacing: .14em; text-transform: uppercase;
+    border-radius: 2px; text-decoration: none; display: inline-block;
+    transition: border-color .25s, color .25s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* =============================================
+     JOIN THE TEAM CTA STRIP
+  ============================================= */
+  #join-cta {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 5%;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #join-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #join-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--white); margin-bottom: .8rem;
+  }
+  #join-cta h2 em { font-style: italic; color: var(--gold-light); }
+  #join-cta p {
+    font-size: 1rem; font-weight: 300; color: var(--text-muted);
+    max-width: 480px; margin: 0 auto 2rem; line-height: 1.8;
+  }
+
+  /* =============================================
+     FOOTER — mirrors main site
+  ============================================= */
+  footer {
+    background: #07111f;
+    border-top: 1px solid var(--border);
+    padding: 4rem 5% 2.5rem;
+  }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.8rem; margin-top: 2rem;
+    display: flex; justify-content: space-between;
+    align-items: center; font-size: .88rem;
+    color: var(--text-muted); font-weight: 300;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+  /* =============================================
+     SCROLL REVEAL
+  ============================================= */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* =============================================
+     RESPONSIVE
+  ============================================= */
+  @media (max-width: 900px) {
+    .team-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     NAV
+============================================= -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-text">Clifton <span>Vision</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="optometrists.html" class="active">Our Team</a></li>
+    <li><a href="index.html#reviews">Reviews</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+
+<!-- =============================================
+     PAGE HERO
+============================================= -->
+<section id="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="page-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>Clifton Vision</span>
+    </div>
+    <h1 class="page-h1">Our <em>Optometrists</em></h1>
+    <p class="page-sub">
+      Meet the dedicated clinical professionals behind Clifton Vision — experts committed to protecting and enhancing your sight with precision, care, and warmth.
+    </p>
+  </div>
+</section>
+
+
+<!-- =============================================
+     TEAM GRID
+============================================= -->
+<section id="team">
+
+  <div class="section-label reveal">
+    <div class="line"></div>
+    <span>Management Team</span>
+  </div>
+
+  <div class="team-grid">
+
+    <!-- ==========================================
+         PROFILE CARD 1
+    =========================================== -->
+    <article class="profile-card reveal">
+
+      <!-- PHOTO -->
+      <div class="profile-photo-wrap">
+        <!--
+          ╔═══════════════════════════════════════════╗
+          ║  REPLACE src BELOW with the actual image  ║
+          ║  path or Base64 string, e.g.:             ║
+          ║  src="img/optometrist-1.jpg"              ║
+          ╚═══════════════════════════════════════════╝
+        -->
+        <img
+          src="Saleha.jpeg"
+          alt="Clifton Vision optometrist portrait"
+        />
+        <div class="profile-role-ribbon">
+          <span>Optometrist & Director</span>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="profile-body">
+
+        <h2 class="profile-name">Mrs. Sal Jaffe</h2>
+        <p class="profile-title">BSc (Hons) Optometry &nbsp;·&nbsp; MCOptom</p>
+        <div class="profile-divider"></div>
+
+        <p class="profile-bio">
+          With over <strong style="color:var(--white);font-weight:500;">11 years of clinical experience</strong>, Sal brings exceptional skill and a genuine passion for patient care to Clifton Vision. She completed her optometry degree at Bradford University and holds membership of the College of Optometrists. Her calm, thorough approach puts every patient at ease — whether attending a routine sight test or a complex clinical assessment.
+        </p>
+
+        <!-- Credential tags -->
+        <div class="profile-credentials">
+          <span class="credential-tag">MCOptom</span>
+          <span class="credential-tag">GOC Registered</span>
+          <!-- <span class="credential-tag">IP Qualified</span> -->
+          <span class="credential-tag">Contact Lens Spec.</span>
+        </div>
+
+        <!-- Specialisms -->
+        <ul class="profile-specialisms">
+          <li>Comprehensive sight testing &amp; refractive assessment</li>
+          <li>Contact lens fitting &amp; aftercare</li>
+          <li>Dry eye management &amp; ocular therapeutics</li>
+          <li>Paediatric optometry</li>
+          <li>Glaucoma &amp; diabetic eye disease monitoring</li>
+        </ul>
+
+        <!-- CTAs -->
+        <div class="profile-contact-row">
+          <a href="index.html#booking" class="btn-primary">Book an Appointment</a>
+          <a href="mailto:info@cliftonvision.co.uk" class="btn-ghost">Send a Message</a>
+        </div>
+
+      </div>
+    </article>
+
+  <article class="profile-card reveal">
+
+      <!-- PHOTO 2 -->
+      <div class="profile-photo-wrap">
+        <!--
+          ╔═══════════════════════════════════════════╗
+          ║  REPLACE src BELOW with the actual image  ║
+          ║  path or Base64 string, e.g.:             ║
+          ║  src="img/optometrist-1.jpg"              ║
+          ╚═══════════════════════════════════════════╝
+        -->
+        <img
+          src="CV - practice.jpeg"
+          alt="Clifton Vision optometrist portrait"
+        />
+        <div class="profile-role-ribbon">
+          <span>Practice Manager & Director</span>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="profile-body">
+
+        <h2 class="profile-name">Mr. Saifi Hashmi</h2>
+        <p class="profile-title">MSc (Neural Networks)</p>
+        <div class="profile-divider"></div>
+
+        <p class="profile-bio">
+          Saifi has worked in Business Intelligence and Business Development role within Healthcare for over 40 years. He was Head of BI at a private Hospital delivering Cataract Surgery. As Head of IT at Uk Transplant Augthority Saifi project managed the development and deployment of National Transplant Database and Complex Algorithm for matching Tissue types for Organ Transplant such as Corneas.
+        </p>
+
+        <!-- Credential tags -->
+        <div class="profile-credentials">
+          <span class="credential-tag">Chartered Engineer</span>
+          <!-- <span class="credential-tag">GOC Registered</span>
+          <span class="credential-tag">IP Qualified</span> 
+          <span class="credential-tag">Contact Lens Spec.</span> -->
+        </div>
+
+        <!-- Specialisms 
+        <ul class="profile-specialisms">
+          <li>Comprehensive sight testing &amp; refractive assessment</li>
+          <li>Contact lens fitting &amp; aftercare</li>
+          <li>Dry eye management &amp; ocular therapeutics</li>
+          <li>Paediatric optometry</li>
+          <li>Glaucoma &amp; diabetic eye disease monitoring</li>
+          <li>Post Cataract Consultation</li>   -->
+
+        </ul>
+
+        <!-- CTAs -->
+        <div class="profile-contact-row">
+          <a href="index.html#booking" class="btn-primary">Book an Appointment</a>
+          <a href="mailto:info@cliftonvision.co.uk" class="btn-ghost">Send a Message</a>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ==========================================
+         PLACEHOLDER — Additional optometrist
+         (Duplicate and fill in when ready)
+    =========================================== -->
+    <article class="profile-card reveal" style="opacity:.45; pointer-events:none; filter:grayscale(1);">
+      <div class="profile-photo-wrap" style="display:flex;align-items:center;justify-content:center;background:var(--navy-light);">
+        <svg style="width:64px;height:64px;color:rgba(201,168,76,.25);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <div class="profile-role-ribbon"><span>Optometrist</span></div>
+      </div>
+      <div class="profile-body">
+        <h2 class="profile-name" style="color:var(--text-muted);">Coming Soon</h2>
+        <p class="profile-title">Profile in preparation</p>
+        <div class="profile-divider"></div>
+        <p class="profile-bio">We are growing our team. A full profile for this optometrist will be available shortly.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+     JOIN THE TEAM CTA
+============================================= -->
+<section id="join-cta" class="reveal">
+  <h2>Interested in <em>Joining Our Team?</em></h2>
+  <p>
+    We are always looking for talented, patient-centred optometrists to join the Clifton Vision family. We'd love to hear from you.
+  </p>
+  <a href="mailto:info@cliftonvision.co.uk" class="btn-primary">Get in Touch</a>
+</section>
+
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 Clifton Vision. All rights reserved.</span>
+    <span>
+      <a href="index.html">← Back to Main Site</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="index.html#booking">Book an Appointment</a>
+    </span>
+  </div>
+</footer>
+
+
+<!-- =============================================
+     SCROLL REVEAL JS
+============================================= -->
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

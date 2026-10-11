@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clifton Vision — Opticians</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #152540;
+    --navy-light: #1e3454;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --text-muted: #8a9bb5;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body { font-family: 'Jost', sans-serif; background: var(--navy); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13,27,46,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+
+  .nav-logo img {
+    height: 58px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: .95rem; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; transition: color .25s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold) !important; padding: .65rem 1.6rem; border-radius: 2px; transition: all .25s !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 7rem 5% 5rem; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(21,37,64,.8) 0%, transparent 70%), linear-gradient(160deg, #0d1b2e 0%, #152540 50%, #0d1b2e 100%); }
+  .hero-grid { position: absolute; inset: 0; z-index: 0; opacity: .04; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 60px 60px; }
+
+  .hero-eye-ring { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); width: min(46vw, 540px); height: min(34vw, 400px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(201,168,76,.25); box-shadow: 0 8px 48px rgba(0,0,0,.45); }
+  @keyframes slowSpin { to { transform: translateY(-50%) rotate(360deg); } }
+
+  .hero-content { position: relative; z-index: 1; max-width: 580px; }
+  .hero-eyebrow { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.8rem; }
+  .hero-eyebrow span { font-size: .85rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+  .eyebrow-line { width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+  .hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.4rem, 6.5vw, 6rem); font-weight: 300; line-height: 1.05; color: var(--white); letter-spacing: -.01em; margin-bottom: 1.6rem; }
+  .hero-h1 em { font-style: italic; color: var(--gold-light); display: block; }
+  .hero-p { font-size: 1.1rem; font-weight: 300; line-height: 1.85; color: var(--text-muted); max-width: 420px; margin-bottom: 2.8rem; }
+  .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+  .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--navy); border: none; cursor: pointer; padding: 1rem 2.4rem; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; border-radius: 2px; text-decoration: none; display: inline-block; transition: opacity .25s, transform .2s; }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(245,240,232,.25); cursor: pointer; padding: 1rem 2.4rem; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; letter-spacing: .14em; text-transform: uppercase; border-radius: 2px; text-decoration: none; display: inline-block; transition: border-color .25s, color .25s; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats { position: absolute; bottom: 4rem; left: 5%; right: 5%; display: flex; gap: 3rem; z-index: 1; border-top: 1px solid var(--border); padding-top: 2rem; }
+  .stat-item { display: flex; flex-direction: column; gap: .3rem; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold); }
+  .stat-label { font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); font-weight: 300; }
+
+  /* SECTIONS */
+  section { padding: 7rem 5%; }
+  .section-label { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+  .section-label span { font-size: .82rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+  .section-label .line { width: 32px; height: 1px; background: var(--gold); opacity: .5; }
+  .section-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 4.5vw, 3.8rem); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 1.2rem; }
+  .section-p { font-size: 1.05rem; font-weight: 300; line-height: 1.9; color: var(--text-muted); max-width: 520px; }
+
+  /* SERVICES */
+  #services { background: var(--navy-mid); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5px; margin-top: 4rem; border: 1.5px solid var(--border); }
+  .service-card { background: var(--navy); padding: 2.8rem 2.2rem; position: relative; overflow: hidden; transition: background .3s; }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); transform: scaleX(0); transition: transform .4s; }
+  .service-card:hover { background: var(--navy-light); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { width: 48px; height: 48px; margin-bottom: 1.6rem; color: var(--gold); opacity: .85; }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--white); margin-bottom: .8rem; }
+  .service-desc { font-size: 1rem; font-weight: 300; line-height: 1.75; color: var(--text-muted); }
+
+  /* ABOUT */
+  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-visual { position: relative; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; }
+  .about-frame { position: absolute; inset: 0; border: 1px solid var(--border); border-radius: 4px; background: linear-gradient(145deg, var(--navy-light), var(--navy)); overflow: hidden; }
+  .about-frame-inner { position: absolute; inset: 12px; border: 1px solid rgba(201,168,76,.08); border-radius: 2px; display: flex; align-items: center; justify-content: center; }
+  .about-badge { position: absolute; bottom: -1.5rem; right: -1.5rem; width: 130px; height: 130px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 2; }
+  .about-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--navy); line-height: 1; }
+  .about-badge-label { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); font-weight: 500; margin-top: .2rem; max-width: 70px; text-align: center; line-height: 1.3; }
+  .about-list { list-style: none; margin: 2rem 0; display: flex; flex-direction: column; gap: .8rem; }
+  .about-list li { display: flex; align-items: center; gap: .9rem; font-size: 1.02rem; font-weight: 300; color: var(--text-muted); }
+  .about-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* BOOKING */
+  #booking { background: var(--navy-mid); }
+  .booking-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+  .booking-detail { display: flex; gap: 1.2rem; align-items: flex-start; margin-bottom: 2rem; }
+  .booking-detail-icon { width: 40px; height: 40px; flex-shrink: 0; background: rgba(201,168,76,.1); border-radius: 2px; display: flex; align-items: center; justify-content: center; color: var(--gold); }
+  .booking-detail-icon svg { width: 18px; height: 18px; }
+  .booking-detail-text strong { display: block; font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: .3rem; letter-spacing: .04em; }
+  .booking-detail-text span { font-size: .95rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+
+  .booking-form { background: var(--navy); border: 1px solid var(--border); padding: 2.8rem; border-radius: 4px; position: relative; overflow: hidden; }
+  .booking-form::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.4rem; }
+  .form-group label { font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); font-weight: 400; }
+  .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,.03); border: 1px solid rgba(201,168,76,.2); color: var(--cream); font-family: 'Jost', sans-serif; font-size: 1.05rem; font-weight: 300; padding: .95rem 1.1rem; border-radius: 2px; outline: none; transition: border-color .25s, background .25s; appearance: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); background: rgba(201,168,76,.04); }
+  .form-group select option { background: var(--navy-mid); color: var(--cream); }
+  .form-group textarea { min-height: 90px; resize: vertical; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(138,155,181,.4); }
+
+  .form-submit { width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--navy); border: none; cursor: pointer; padding: 1.15rem; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; border-radius: 2px; transition: opacity .25s, transform .2s; display: flex; align-items: center; justify-content: center; gap: .6rem; }
+  .form-submit:hover { opacity: .88; transform: translateY(-1px); }
+  .form-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; background: var(--navy-light); border: 1px solid var(--gold); border-radius: 4px; padding: 1.2rem 1.6rem; display: flex; align-items: center; gap: .8rem; transform: translateY(120%); opacity: 0; transition: all .4s cubic-bezier(.34,1.56,.64,1); max-width: 360px; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .toast.success .toast-icon { background: rgba(201,168,76,.15); color: var(--gold); }
+  .toast.error .toast-icon { background: rgba(224,92,92,.15); color: #e05c5c; }
+  .toast-msg { font-size: 1rem; font-weight: 300; color: var(--cream); line-height: 1.5; }
+  .toast-msg strong { display: block; font-weight: 500; margin-bottom: .15rem; }
+
+  /* FOOTER */
+  footer { background: #07111f; border-top: 1px solid var(--border); padding: 4rem 5% 2.5rem; }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand p { font-size: .95rem; font-weight: 300; line-height: 1.8; color: var(--text-muted); margin-top: 1.2rem; max-width: 220px; }
+  .footer-col h4 { font-size: .82rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+  .footer-col ul li a, .footer-col ul li span { font-size: .95rem; font-weight: 300; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-reg {
+    border-top: 1px solid var(--border);
+    padding-top: 1.2rem;
+    margin-bottom: .8rem;
+    font-size: .72rem;
+    color: rgba(138,155,181,.5);
+    font-weight: 300;
+    letter-spacing: .04em;
+  }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.8rem; display: flex; justify-content: space-between; align-items: center; font-size: .88rem; color: var(--text-muted); font-weight: 300; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* REVIEWS */
+  #reviews { background: var(--navy-mid); }
+  .reviews-intro { max-width: 620px; margin-bottom: 3.5rem; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+
+  .review-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem 2rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s, transform .2s;
+  }
+  .review-card:hover { border-color: rgba(201,168,76,.5); transform: translateY(-2px); }
+  .review-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .review-card:hover::before { opacity: 1; }
+
+  .review-stars { display: flex; gap: .25rem; margin-bottom: .9rem; }
+  .star { color: var(--gold); font-size: 1.1rem; }
+
+  .review-text {
+    font-size: .98rem; font-weight: 300; line-height: 1.75;
+    color: var(--text-muted); margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+  .review-text::before { content: '\201C'; font-size: 1.4rem; color: var(--gold); opacity: .6; line-height: 0; vertical-align: -.3rem; margin-right: .1rem; }
+  .review-text::after  { content: '\201D'; font-size: 1.4rem; color: var(--gold); opacity: .6; line-height: 0; vertical-align: -.3rem; margin-left: .1rem; }
+
+  .review-author { display: flex; align-items: center; gap: .8rem; border-top: 1px solid var(--border); padding-top: .9rem; }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); flex-shrink: 0;
+  }
+  .review-name { font-size: .9rem; font-weight: 500; color: var(--white); }
+  .review-date { font-size: .8rem; font-weight: 300; color: var(--text-muted); }
+
+  .reviews-cta-row {
+    display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center;
+    background: var(--navy); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2rem 2.4rem; margin-top: .5rem;
+  }
+  .reviews-cta-text { flex: 1; min-width: 220px; }
+  .reviews-cta-text h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400;
+    color: var(--white); margin-bottom: .4rem;
+  }
+  .reviews-cta-text p { font-size: .98rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; }
+
+  .btn-google {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: #fff; color: #3c4043;
+    border: none; cursor: pointer;
+    padding: .9rem 1.8rem;
+    font-family: 'Jost', sans-serif; font-size: .95rem; font-weight: 500;
+    letter-spacing: .04em; border-radius: 4px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    transition: box-shadow .25s, transform .2s;
+    white-space: nowrap;
+  }
+  .btn-google:hover { box-shadow: 0 4px 16px rgba(0,0,0,.5); transform: translateY(-1px); }
+  .btn-google svg { flex-shrink: 0; }
+
+  /* WRITE A REVIEW form */
+  .write-review-panel {
+    background: var(--navy); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2.4rem 2.8rem;
+    margin-top: 1.8rem; position: relative; overflow: hidden;
+  }
+  .write-review-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .write-review-panel h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 300;
+    color: var(--white); margin-bottom: .4rem;
+  }
+  .write-review-panel > p {
+    font-size: .98rem; font-weight: 300; color: var(--text-muted); margin-bottom: 1.6rem; line-height: 1.6;
+  }
+  .star-picker { display: flex; gap: .5rem; margin-bottom: 1.4rem; cursor: pointer; }
+  .star-picker .sp { font-size: 1.6rem; color: rgba(201,168,76,.25); transition: color .15s; cursor: pointer; }
+  .star-picker .sp.active { color: var(--gold); }
+  .star-picker-label { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted); font-weight: 400; margin-bottom: .5rem; display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #about { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .booking-layout { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 1.8rem; }
+    .hero-eye-ring { display: none; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; }
+  }
+  /* EXCLUSIVE Rodenstock BANNER */
+  #Rodenstock {
+    background: linear-gradient(135deg, #0a1628 0%, var(--navy-mid) 40%, #1a2d1a 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #Rodenstock::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .Rodenstock-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .exclusive-badge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .exclusive-outer-ring {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,.25);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: slowSpin 25s linear infinite;
+  }
+
+  .exclusive-outer-ring::before {
+    content: '';
+    position: absolute; inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(201,168,76,.15);
+  }
+
+  .exclusive-inner {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    box-shadow: 0 0 60px rgba(201,168,76,.25), 0 0 120px rgba(201,168,76,.08);
+    animation: slowSpin 25s linear infinite reverse;
+  }
+
+  .exclusive-inner svg {
+    width: 32px; height: 32px;
+    color: var(--navy); margin-bottom: .5rem;
+  }
+
+  .exclusive-inner-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--navy); line-height: 1.1;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+
+  .exclusive-inner-sub {
+    font-size: .62rem; font-weight: 600;
+    color: rgba(13,27,46,.7);
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-top: .3rem;
+  }
+
+  .exclusive-dots {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .exclusive-dots:nth-child(1) { top: 10px; left: 50%; transform: translateX(-50%); }
+  .exclusive-dots:nth-child(2) { bottom: 10px; left: 50%; transform: translateX(-50%); }
+  .exclusive-dots:nth-child(3) { left: 10px; top: 50%; transform: translateY(-50%); }
+  .exclusive-dots:nth-child(4) { right: 10px; top: 50%; transform: translateY(-50%); }
+
+  .Rodenstock-content .exclusive-pill {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: rgba(201,168,76,.12);
+    border: 1px solid rgba(201,168,76,.35);
+    border-radius: 100px;
+    padding: .45rem 1.1rem;
+    font-size: .78rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.6rem;
+  }
+
+  .exclusive-pill svg { width: 14px; height: 14px; }
+
+  .Rodenstock-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300; color: var(--white);
+    line-height: 1.1; margin-bottom: 1.2rem;
+  }
+
+  .Rodenstock-content h2 em {
+    font-style: italic; color: var(--gold-light);
+  }
+
+  .Rodenstock-content p {
+    font-size: 1.05rem; font-weight: 300;
+    line-height: 1.9; color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .Rodenstock-content p strong {
+    color: var(--white); font-weight: 500;
+  }
+
+  .Rodenstock-features {
+    list-style: none;
+    margin: 1.8rem 0 2.2rem;
+    display: flex; flex-direction: column; gap: .9rem;
+  }
+
+  .Rodenstock-features li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    font-size: 1rem; font-weight: 300; color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .Rodenstock-features li .feat-icon {
+    width: 22px; height: 22px; flex-shrink: 0;
+    background: rgba(201,168,76,.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); margin-top: .15rem;
+  }
+
+  .Rodenstock-features li .feat-icon svg { width: 11px; height: 11px; }
+
+  @media (max-width: 900px) {
+    .Rodenstock-layout { grid-template-columns: 1fr; }
+    .exclusive-badge-wrap { margin-bottom: 2rem; }
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="CV logo2.png" alt="Clifton Vision" style="height:78px;width:78px;object-fit:contain;border-radius:50%;border:2.5px solid rgba(201,168,76,0.5);drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="optometrists.html">Team</a></li>
+    <li><a href="#booking">Appointments</a></li>
+    <li><a href="patient info.html" style="color:var(--gold)!important;">Patient Info</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eye-ring">
+    <img src="Clifton Vision - Display units.png"
+         alt="Clifton Vision Display Units"
+         style="width:120%;height:100%;object-fit:cover;border-radius:8px;border:1px solid rgba(201,168,76,.25);box-shadow:0 8px 48px rgba(0,0,0,.45);" />
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>Clifton, Bristol · Est. 2026</span>
+    </div>
+    <h1 class="hero-h1">
+      Clarity,<br>
+      <em>crafted for you.</em>
+    </h1>
+    <p class="hero-p">
+      Bristol's newest independent optician. From comprehensive eye examinations to our curated collection of frames — we see to every detail of your vision and eye health. Our Dry Eye Clinic has already opened and we are accepting new requests. <strong style="color:var(--white);font-weight:500;">Eye Exam appointments are availbale from November 1st 2026</strong>
+    </p>
+    
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book an Appointment</a>
+      <!-- Comment out - Saifi <a href="#services" class="btn-ghost">Our Services</a> -->
+    </div>
+    
+  </div>
+  <!-- comment out - Saifi
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num">NHS &amp;</span><span class="stat-label">Private Care</span></div>
+    <div class="stat-item"><span class="stat-num">All</span><span class="stat-label">Ages Welcome</span></div>
+    <div class="stat-item"><span class="stat-num">5★</span><span class="stat-label">Client Reviews</span></div>
+    <div class="stat-item"><span class="stat-num">Same</span><span class="stat-label">Day Appointments</span></div>
+  </div>
+  -->
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal"><div class="line"></div><span>What We Offer</span></div>
+  <h2 class="section-h2 reveal">Complete Eye Care<br>Under One Roof</h2>
+  <p class="section-p reveal">Our experienced team provides a full spectrum of vision and eye health services for the whole Bristol community.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      <div class="service-title">Private Eye Exams</div>
+      <div class="service-desc">Advanced assessment using OCT, Biometric Eye Scanning (DNEye Scanner) and antioxidant screening.</div>
+    </div>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <div class="service-title">Sustainable & Designer Eyewear</div>
+      <div class="service-desc">A carefully curated collection of frames for all ages and budgets — from everyday essentials to statement designer pieces fitted with precision.</div>
+    </div>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2a3 3 0 0 1 3 3c0 1.5-1 2.5-1 4h-4c0-1.5-1-2.5-1-4a3 3 0 0 1 3-3z"/><path d="M9 9h6l1 10H8z"/><path d="M9.5 16a2.5 2.5 0 0 0 5 0"/></svg>
+      <div class="service-title">Contact Lens Fitting</div>
+      <div class="service-desc">Full contact lens fitting service including complex prescriptions, specialist lenses for dry eye, keratoconus, and myopia control.</div>
+    </div>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div class="service-title">Myopia Management</div>
+      <div class="service-desc">Specialist assessment and treatment for short-sightedness in children and adults. Using the latest evidence-based techniques to slow myopia progression and protect long-term vision.</div>
+    </div>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 3l18 18M10.5 10.677A2 2 0 0 0 12 14a2 2 0 0 0 2-2 2 2 0 0 0-.677-1.5"/><path d="M14 5.07A9.96 9.96 0 0 1 22.9 12c-.888 2.374-2.376 4.42-4.29 5.888"/><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24M10.73 5.08A10.43 10.43 0 0 1 12 5c5.523 0 10 4.477 10 10"/><path d="M3.42 10.45C2.53 11.02 1.73 11.72 1.1 12.5c.888 2.374 2.376 4.42 4.29 5.888"/></svg>
+      <div class="service-title">Dry Eye Clinic</div>
+      <div class="service-desc">Specialist assessment and management of dry eye syndrome using the latest diagnostic tools and clinically proven treatment plans tailored to your needs.</div>
+    </div>
+
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2"/><path d="M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/><circle cx="12" cy="12" r="7" stroke-dasharray="2 3"/>
+      </svg>
+      <div class="service-title">Lumecca-I</div>
+      <div class="service-desc">Intense Pulsed Light (IPL) therapy to reduce vascular inflammation and treat dry eye and ocular surface disease. Delivers precise, targeted spot-size treatments for effective, lasting relief.</div>
+    </div>
+
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12h8m-4-4v8"/><path d="M6 8c0 0 1.5 2 6 2s6-2 6-2"/><path d="M6 16c0 0 1.5-2 6-2s6 2 6 2"/>
+      </svg>
+      <div class="service-title">Forma-I</div>
+      <div class="service-desc">Bipolar Radiofrequency (RF) therapy delivering targeted energy to the delicate periorbital area and meibomian glands. Improves meibum quality for dry eye relief whilst stimulating collagen production to rejuvenate the periorbital area.</div>
+    </div>
+
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 8v4l3 3"/>
+        <path d="M5.5 5.5A9 9 0 0 1 21 12"/>
+        <path d="M3.5 12a8.5 8.5 0 0 0 2 5.5"/>
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 3v2m0 14v2M3 12h2m14 0h2"/>
+      </svg>
+      <div class="service-title">Heart.Eye Consultation</div>
+      <div class="service-desc">Eye-based Cardiovascular risk screening with Heart Eye by Dr Noon </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Rodenstock EXCLUSIVE -->
+<!--
+<section id="Rodenstock">
+  <div class="Rodenstock-layout">
+
+    <div class="exclusive-badge-wrap reveal">
+      <div class="exclusive-outer-ring">
+        <span class="exclusive-dots"></span>
+        <span class="exclusive-dots"></span>
+        <span class="exclusive-dots"></span>
+        <span class="exclusive-dots"></span>
+        <div class="exclusive-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+          </svg>
+          <div class="exclusive-inner-title">Exclusive<br>Bristol<br>Partner</div>
+          <div class="exclusive-inner-sub">Rodenstock</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rodenstock-content reveal">
+      <div class="exclusive-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+        </svg>
+        Exclusive Agreement · Bristol Only
+      </div>
+
+      <h2>Bristol's Only<br><em>Rodenstock Lens Provider</em></h2>
+
+      <p>At Clifton Vision, we believe you deserve more than just a pair of glasses — you deserve to experience the world at its very best. Through our exclusive partnership with Rodenstock, a global leader in precision optics and lens innovation, we are proud to offer the full range of premium lenses engineered to deliver exceptional clarity, comfort and personalised vision. Using pioneering technology such as B.I.G. VISION®, Rodenstock can incorporate individual biometric eye data into lens design, helping create lenses tailored to the unique characteristics of your eyes. The benefit for you? Sharper, more natural vision, greater visual comfort and a lens experience designed around you — whether you’re working at a screen, driving at night, reading or enjoying the moments that matter most. Combined with Clifton Vision’s expert eye care, Rodenstock lenses help you see beyond the ordinary, with confidence in every detail.</p>
+
+<p>The Clifton Vision difference: Through our exclusive Rodenstock partnership, we can offer patients access to advanced lens technology that looks beyond prescription strength to consider the individual characteristics of their eyes and, with selected lenses, their visual sensitivity. </p>
+
+      <ul class="Rodenstock-features">
+        <li>
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+         <span><strong style="color:var(--white)">Biometric Precision — Designed Around Your Eyes</strong> — Rodenstock uses advanced DNEye® scanning technology to measure thousands of individual eye data points, creating a detailed biometric model of each eye. This goes beyond a standard prescription to help deliver sharper, more precise vision tailored to your unique eyes.</span>
+        </li>
+        <li>
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong style="color:var(--white)">Brain-Informed Lens Design — Vision That Feels Natural</strong> — Rodenstock’s B.I.G. EXACT® Sensitive lenses go a step further by combining over 7,000 biometric data points and 80+ parameters with a visual sensitivity profile to account for how the brain processes visual information. The goal is a more natural, effortless visual experience designed around the individual.</span>
+        </li>
+        <li>
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong style="color:var(--white)">Exceptional Clarity — From Every Angle</strong> — By tailoring lens calculations to the wearer’s individual eye characteristics, Rodenstock aims to provide sharp, detailed vision across different viewing directions. This can help make everyday activities such as reading, working at a screen and driving feel more comfortable and visually effortless.</span>
+        </li>
+        <li>
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span><strong style="color:var(--white)">German Engineering — Precision in Every Detail</strong> — Built on decades of optical expertise and ongoing lens innovation, Rodenstock combines advanced measurement technology with sophisticated lens calculations. The result is a premium lens range designed to deliver personalised vision solutions for different prescriptions, lifestyles and visual needs.</span>
+        </li>
+      </ul>
+
+      <a href="#booking" class="btn-primary">Book Your Appointment</a>
+    </div>
+
+  </div>
+</section>
+-->
+
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-frame"><div class="about-frame-inner" style="padding:0;overflow:hidden;border-radius:2px;">
+      <img src="Saleha 3.png">
+    </div></div>
+    <!-- <div class="about-badge"><div class="about-badge-num">№1</div><div class="about-badge-label">Your Local Optometrist</div> --> </div>
+  </div>
+  <div>
+    <div class="section-label reveal"><div class="line"></div><span>Our Practice</span></div>
+    <h2 class="section-h2 reveal">Local, Independent<br>&amp; Dedicated to You</h2>
+    <p class="section-p reveal">Clifton Vision was created by Sal Jaffe to bring together advanced optometry, specialist dry eye care and a more personal approach to eye health.<br> <br> Every consultation is designed to understand the individual behind the prescription — from detailed eye health assessment and contact lenses to dry eye diagnostics, myopia control and Heart Eye screening.</p>
+    <ul class="about-list reveal">
+      <li>Advanced Private eye examinations for all ages</li>
+      <li>Experienced optometrists and dry eye specialists</li>
+      <li>Contact Lens specialist</li>
+      <li>Wide range of frames to suit every budget</li>
+      <li>Eyecare Plan — affordable monthly access to full eyecare (from £13.50)</li>
+      <li>Specialist clinics for dry eye, myopia control &amp; more</li>
+      <li>A welcoming, patient-first environment</li>
+    </ul>
+    <a href="#booking" class="btn-primary reveal" style="margin-top:.8rem;">Reserve Your Appointment</a>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-label reveal"><div class="line"></div><span>Appointments</span></div>
+  <h2 class="section-h2 reveal">Book Your Visit</h2>
+  <p class="section-p reveal">Reserve your appointment online. We'll confirm your booking by phone or email within one working day.</p>
+  <div class="booking-layout">
+    <div class="booking-info">
+      <div class="booking-detail reveal">
+        <div class="booking-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="booking-detail-text"><strong>Opening Hours</strong><span>Mon – Thu & Saturday: 10:00am – 7:00pm<br>Friday: 10:00 - 5:00pm<br>Sunday: 11:00am – 5:00pm</span></div>
+      </div>
+      <div class="booking-detail reveal">
+        <div class="booking-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="booking-detail-text"><strong>Find Us</strong><span><a href="https://www.google.com/maps/search/?api=1&query=174+Whiteladies+Road+Clifton+Bristol+BS8+2XU" target="_blank" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">174 Whiteladies Road<br>Clifton, Bristol BS8 2XU</a></span></div>
+      </div>
+      <div class="booking-detail reveal">
+        <div class="booking-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="booking-detail-text"><strong>Call Us</strong><span>0117 256 5023</span></div>
+      </div>
+      <div class="booking-detail reveal">
+        <div class="booking-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="booking-detail-text"><strong>Email</strong><span>info@cliftonvision.co.uk</span></div>
+      </div>
+    </div>
+
+    <div class="booking-form reveal">
+      <div class="form-row">
+        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="Jane" required></div>
+        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Smith" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="jane@example.com" required></div>
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="phone" placeholder="07700 900000" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Appointment Type *</label>
+          <select id="apptType" required>
+            <option value="" disabled selected>Select a service</option>
+            <!-- <option>NHS Eye Examination</option> -->
+            <option>Private Eye Examination</option>
+            <option>Contact Lens Fitting</option>
+            <option>Children's Eye Examination</option>
+            <option>Dry Eye Clinic</option>
+            <option>Lumecca-I (IPL Treatment)</option>
+            <option>Forma-I (RF Treatment)</option>
+             <option>Heart.Eye Consultation</option>
+           <option>Post-Cataract Consultation</option>
+            <option>Frame Consultation</option>
+            <option>Eyecare Plan Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Preferred Date *</label><input type="date" id="prefDate" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Preferred Time</label>
+          <select id="prefTime">
+            <option value="" disabled selected>Any time</option>
+            <option>Morning (9am – 12pm)</option>
+            <option>Afternoon (12pm – 3pm)</option>
+            <option>Late Afternoon (3pm – 5:30pm)</option>
+          </select>
+        </div>
+        <div class="form-group"><label>New or Returning Patient?</label>
+          <select id="patientType">
+            <option value="" disabled selected>Select</option>
+            <option>New Patient</option>
+            <option>Returning Patient</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Additional Notes</label><textarea id="notes" placeholder="Any specific concerns, accessibility requirements, or information we should know..."></textarea></div>
+      <button class="form-submit" id="submitBtn" onclick="submitBooking()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+        Send Booking Request
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE REVIEWS -->
+<section id="reviews">
+  <div class="section-label reveal"><div class="line"></div><span>Client Reviews</span></div>
+  <h2 class="section-h2 reveal">What Our Clients Say</h2>
+  <p class="section-p reveal reviews-intro">We're proud to be earning the trust of our community. Here's a selection of recent feedback — and we'd love to hear from you too.</p>
+
+  <div class="reviews-grid">
+
+    <div class="review-card reveal">
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">Wonderful experience at Clifton Vision, Sal and everyone working there is extremely knowledgeable, friendly and professional.
+I also enjoy walking through the door to my appointments. 10/10</p>
+      <div class="review-author">
+        <div class="review-avatar">HB</div>
+        <div>
+          <div class="review-name">Helen B.</div>
+          <div class="review-date">Online Review · October 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I just had radio frequency treatment for dry eye with the Optician Sal….after one session my eyes are feeling great. A beautiful practice and everyone is so friendly :)</p>
+      <div class="review-author">
+        <div class="review-avatar">HZ</div>
+        <div>
+          <div class="review-name">Homeira Z.</div>
+          <div class="review-date">Online Review · October 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="review-text">I have just had 3 sessions of radiofrequency for dry eye and WOW! What a difference this has made!...</p>
+      <div class="review-author">
+        <div class="review-avatar">MH</div>
+        <div>
+          <div class="review-name">Munira H.</div>
+          <div class="review-date">Online Review · October 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.reviews-grid -->
+
+  <!-- Leave a review on Google -->
+  <div class="reviews-cta-row reveal">
+    <div class="reviews-cta-text">
+      <h3>Visited us recently?</h3>
+      <p>Your feedback helps other patients in Bristol discover great eye care — and helps us keep improving. Leave us a review on Google.</p>
+    </div>
+    <a href="https://g.page/r/CQ8-sO7glM-2EAI/review" target="_blank" rel="noopener" class="btn-google" id="googleReviewBtn">
+      <!-- Google 'G' logo -->
+      <svg width="20" height="20" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"/>
+        <path fill="#34A853" d="M272.1 544.3c73.4 0 135.3-24.1 180.4-65.7l-87.7-68c-24.4 16.6-55.9 26-92.6 26-71 0-131.2-47.9-152.8-112.3H28.9v70.1c46.2 91.9 140.3 149.9 243.2 149.9z"/>
+        <path fill="#FBBC04" d="M119.3 324.3c-11.4-33.8-11.4-70.4 0-104.2V150H28.9c-38.6 76.9-38.6 167.5 0 244.4l90.4-70.1z"/>
+        <path fill="#EA4335" d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"/>
+      </svg>
+      Write a Google Review
+    </a>
+  </div>
+
+  <!-- Write a comment form -->
+  <div class="write-review-panel reveal">
+    <h3>Share Your Experience</h3>
+    <p>Leave a quick comment below — we read every one and will reply personally. For detailed feedback, use the Google link above.</p>
+
+    <div class="form-group">
+      <label class="star-picker-label">Your Rating *</label>
+      <div class="star-picker" id="starPicker" role="group" aria-label="Select a star rating">
+        <span class="sp" data-val="1" title="1 star">★</span>
+        <span class="sp" data-val="2" title="2 stars">★</span>
+        <span class="sp" data-val="3" title="3 stars">★</span>
+        <span class="sp" data-val="4" title="4 stars">★</span>
+        <span class="sp" data-val="5" title="5 stars">★</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group"><label>Your Name *</label><input type="text" id="revName" placeholder="Jane Smith" required></div>
+      <div class="form-group"><label>Email Address *</label><input type="email" id="revEmail" placeholder="jane@example.com" required></div>
+    </div>
+
+    <div class="form-group">
+      <label>Your Comments *</label>
+      <textarea id="revComment" style="min-height:110px;resize:vertical;" placeholder="Tell us about your experience — what went well, or how we can do better…" required></textarea>
+    </div>
+
+    <div class="form-group" style="flex-direction:row;align-items:flex-start;gap:.6rem;margin-bottom:1.6rem;">
+      <input type="checkbox" id="revGdpr" style="width:auto;margin-top:.25rem;flex-shrink:0;">
+      <label for="revGdpr" style="text-transform:none;letter-spacing:0;font-size:.92rem;color:var(--text-muted);">I consent to Clifton Vision storing my name and email to process and respond to my comment, in line with our <a href="privacy-policy.html" style="color:var(--gold);">Privacy Policy</a>.</label>
+    </div>
+
+    <button class="form-submit" id="revSubmitBtn" onclick="submitReview()" style="max-width:280px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+      Send Comment
+    </button>
+  </div><!-- /.write-review-panel -->
+
+</section><!-- /#reviews -->
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="CV Logo2.png" alt="Clifton Vision" style="height:88px;width:88px;object-fit:contain;border-radius:50%;border:2.5px solid rgba(201,168,76,0.5);">
+      <p>Dedicated to exceptional eye care for the whole family since 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Private Examinations</a></li>
+        <li><a href="#services">Contact Lenses</a></li>
+        <li><a href="#services">Designer Frames</a></li>
+        <li><a href="#services">Dry Eye Clinic</a></li>
+        <li><a href="#services">Myopia Management</a></li>
+    <!--    <li><a href="#services">Lumecca-I</a></li>
+        <li><a href="#services">Forma-I</a></li>    -->
+        <li><a href="#services">Heart Eye</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Practice</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#booking">Book Appointment</a></li>
+       <!-- <li><a href="#">Eyecare Plan</a></li> -->
+        <li><a href="patient info.html">Patient Info</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+       <li><a href="CV - FAQs.html">FAQs</a></li>
+
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=174+Whiteladies+Road+Clifton+Bristol+BS8+2XU" target="_blank" style="color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;transition:color .2s;">174 Whiteladies Road</a></li>
+        <li><span>Clifton, Bristol BS8 2XU</span></li>
+        <li><span style="margin-top:.4rem;display:block;">0117 256 5023</span></li>
+        <li><span>info@cliftonvision.co.uk</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-reg">
+    <span>Company Registration No. 17182993 &nbsp;|&nbsp; VAT Registration No. 519 1537 87</span>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Clifton Vision Opticians. All rights reserved.</span>
+    <span>Registered Opticians · GOC# CO-47578</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" id="toastSvg"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="toast-msg" id="toastMsg"></div>
+</div>
+
+<script>
+// EmailJS credentials
+const EMAILJS_PUBLIC_KEY  = '5yA34ixYddLC-Flg7';
+const EMAILJS_SERVICE_ID  = 'service_iljbqx6';
+const EMAILJS_TEMPLATE_ID = 'template_nbjyjbf';
+const OPTICIAN_EMAIL      = 'info@cliftonvision.co.uk';
+
+// Set minimum date to today
+document.getElementById('prefDate').min = new Date().toISOString().split('T')[0];
+
+async function submitBooking() {
+  const firstName   = document.getElementById('firstName').value.trim();
+  const lastName    = document.getElementById('lastName').value.trim();
+  const email       = document.getElementById('email').value.trim();
+  const phone       = document.getElementById('phone').value.trim();
+  const apptType    = document.getElementById('apptType').value;
+  const prefDate    = document.getElementById('prefDate').value;
+  const prefTime    = document.getElementById('prefTime').value || 'No preference';
+  const patientType = document.getElementById('patientType').value || 'Not specified';
+  const notes       = document.getElementById('notes').value.trim() || 'None';
+
+  // Validation
+  if (!firstName || !lastName || !email || !phone || !apptType || !prefDate) {
+    showToast('error', 'Missing Details', 'Please fill in all required fields marked with *.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('error', 'Invalid Email', 'Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…';
+
+  // Call EmailJS REST API directly via fetch — works from any origin including file://
+  const payload = {
+    service_id:  EMAILJS_SERVICE_ID,
+    template_id: EMAILJS_TEMPLATE_ID,
+    user_id:     EMAILJS_PUBLIC_KEY,
+    template_params: {
+      to_email:      OPTICIAN_EMAIL,
+      patient_name:  firstName + ' ' + lastName,
+      patient_email: email,
+      patient_phone: phone,
+      appt_type:     apptType,
+      pref_date:     prefDate,
+      pref_time:     prefTime,
+      patient_type:  patientType,
+      notes:         notes,
+      submitted_at:  new Date().toLocaleString('en-GB')
+    }
+  };
+
+  try {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      showToast('success', 'Booking Request Sent!',
+        'Thank you, ' + firstName + '. We\'ll be in touch within one working day to confirm your ' + apptType + '.');
+      // Reset form
+      ['firstName','lastName','email','phone','notes'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('prefDate').value = '';
+      ['apptType','prefTime','patientType'].forEach(id => document.getElementById(id).selectedIndex = 0);
+    } else {
+      const errText = await res.text();
+      console.error('EmailJS API error:', res.status, errText);
+      showToast('error', 'Booking Failed', 'Please call us on 0117 256 5023 to book. (Error ' + res.status + ')');
+    }
+  } catch (err) {
+    console.error('Network error:', err);
+    showToast('error', 'Connection Error', 'Could not reach the server. Please call us on 0117 256 5023.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg> Send Booking Request';
+  }
+}
+
+function showToast(type, title, msg) {
+  const toast     = document.getElementById('toast');
+  const toastMsg  = document.getElementById('toastMsg');
+  const toastIcon = document.getElementById('toastIcon');
+  const toastSvg  = document.getElementById('toastSvg');
+  toast.className = 'toast ' + type;
+  toastMsg.innerHTML = '<strong>' + title + '</strong>' + msg;
+  if (type === 'error') {
+    toastSvg.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+    toastIcon.style.background = 'rgba(224,92,92,.15)';
+    toastIcon.style.color = '#e05c5c';
+  } else {
+    toastSvg.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+    toastIcon.style.background = 'rgba(201,168,76,.15)';
+    toastIcon.style.color = 'var(--gold)';
+  }
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 7000);
+}
+
+// ── STAR PICKER ──────────────────────────────────────────────
+let selectedRating = 0;
+document.addEventListener('DOMContentLoaded', function () {
+  const stars = document.querySelectorAll('#starPicker .sp');
+  stars.forEach(function (s) {
+    s.addEventListener('mouseover', function () {
+      const val = parseInt(s.dataset.val);
+      stars.forEach(function (t) {
+        t.classList.toggle('active', parseInt(t.dataset.val) <= val);
+      });
+    });
+    s.addEventListener('mouseout', function () {
+      stars.forEach(function (t) {
+        t.classList.toggle('active', parseInt(t.dataset.val) <= selectedRating);
+      });
+    });
+    s.addEventListener('click', function () {
+      selectedRating = parseInt(s.dataset.val);
+      stars.forEach(function (t) {
+        t.classList.toggle('active', parseInt(t.dataset.val) <= selectedRating);
+      });
+    });
+  });
+});
+
+// ── SUBMIT REVIEW COMMENT ────────────────────────────────────
+async function submitReview() {
+  const name    = document.getElementById('revName').value.trim();
+  const email   = document.getElementById('revEmail').value.trim();
+  const comment = document.getElementById('revComment').value.trim();
+  const gdpr    = document.getElementById('revGdpr').checked;
+
+  if (!name || !email || !comment) {
+    showToast('error', 'Missing Details', 'Please fill in all required fields.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('error', 'Invalid Email', 'Please enter a valid email address.');
+    return;
+  }
+  if (selectedRating === 0) {
+    showToast('error', 'No Rating', 'Please select a star rating before submitting.');
+    return;
+  }
+  if (!gdpr) {
+    showToast('error', 'Consent Required', 'Please tick the consent checkbox to continue.');
+    return;
+  }
+
+  const btn = document.getElementById('revSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Sending…';
+
+  const stars = '★'.repeat(selectedRating) + '☆'.repeat(5 - selectedRating);
+
+  const payload = {
+    service_id:  EMAILJS_SERVICE_ID,
+    template_id: EMAILJS_TEMPLATE_ID,
+    user_id:     EMAILJS_PUBLIC_KEY,
+    template_params: {
+      to_email:      OPTICIAN_EMAIL,
+      patient_name:  name,
+      patient_email: email,
+      appt_type:     'Patient Review / Comment',
+      pref_date:     new Date().toLocaleDateString('en-GB'),
+      pref_time:     'N/A',
+      patient_type:  'Review Submission',
+      notes:         stars + '\n\n' + comment,
+      submitted_at:  new Date().toLocaleString('en-GB')
+    }
+  };
+
+  try {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+    if (res.ok) {
+      showToast('success', 'Thank You!', 'Your comment has been sent. We\'ll be in touch soon, ' + name + '.');
+      document.getElementById('revName').value    = '';
+      document.getElementById('revEmail').value   = '';
+      document.getElementById('revComment').value = '';
+      document.getElementById('revGdpr').checked  = false;
+      selectedRating = 0;
+      document.querySelectorAll('#starPicker .sp').forEach(function (s) { s.classList.remove('active'); });
+    } else {
+      showToast('error', 'Submission Failed', 'Please email us directly at info@cliftonvision.co.uk. (Error ' + res.status + ')');
+    }
+  } catch (err) {
+    showToast('error', 'Connection Error', 'Could not reach the server. Please try again or email us directly.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg> Send Comment';
+  }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

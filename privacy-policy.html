@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Clifton Vision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #152540;
+    --navy-light: #1e3454;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --text-muted: #8a9bb5;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body { font-family: 'Jost', sans-serif; background: var(--navy); color: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13,27,46,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: .75rem; }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--white); letter-spacing: .06em;
+  }
+  .nav-logo-text span { color: var(--gold); }
+
+  .nav-back {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: .6rem 1.4rem;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: .85rem; font-weight: 400;
+    letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background .25s, color .25s;
+    cursor: pointer;
+  }
+  .nav-back:hover { background: var(--gold); color: var(--navy); }
+  .nav-back svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform .25s; }
+  .nav-back:hover svg { transform: translateX(-3px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    min-height: 38vh;
+    display: flex; align-items: flex-end;
+    position: relative; overflow: hidden;
+    padding: 9rem 5% 4rem;
+    background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%),
+                linear-gradient(160deg, #0d1b2e 0%, #152540 50%, #0d1b2e 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: .04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .page-eyebrow {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem;
+  }
+  .page-eyebrow span {
+    font-size: .82rem; font-weight: 400; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow-line { width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-weight: 300; line-height: 1.08;
+    color: var(--white); letter-spacing: -.01em;
+    margin-bottom: 1rem;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--gold-light); }
+  .page-hero-meta {
+    font-size: .88rem; font-weight: 300;
+    color: var(--text-muted); letter-spacing: .06em;
+    margin-top: .6rem;
+  }
+
+  /* ── POLICY BODY ── */
+  .policy-wrap {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 5% 7rem;
+  }
+
+  /* Table of Contents */
+  .toc {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.4rem 2.8rem;
+    margin-bottom: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .toc::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .toc-title {
+    font-size: .82rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .toc-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .toc ol {
+    list-style: none; display: flex; flex-direction: column; gap: .6rem;
+    counter-reset: toc-counter;
+  }
+  .toc ol li { counter-increment: toc-counter; display: flex; align-items: baseline; gap: .75rem; }
+  .toc ol li::before {
+    content: counter(toc-counter, decimal-leading-zero);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: .95rem; color: var(--gold); opacity: .7;
+    min-width: 28px; flex-shrink: 0;
+  }
+  .toc ol li a {
+    font-size: .95rem; font-weight: 300; color: var(--text-muted);
+    text-decoration: none; transition: color .2s;
+  }
+  .toc ol li a:hover { color: var(--gold); }
+
+  /* Section blocks */
+  .policy-section { margin-bottom: 3.8rem; }
+  .policy-section:last-child { margin-bottom: 0; }
+
+  .section-anchor { display: block; height: 90px; margin-top: -90px; visibility: hidden; }
+
+  .section-header {
+    display: flex; align-items: flex-start; gap: 1.4rem;
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; color: var(--gold); opacity: .6;
+    line-height: 1; flex-shrink: 0; min-width: 2.8rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 300; color: var(--white); line-height: 1.15;
+  }
+
+  .policy-text {
+    font-size: 1rem; font-weight: 300; line-height: 1.9;
+    color: var(--text-muted);
+  }
+  .policy-text + .policy-text { margin-top: 1rem; }
+  .policy-text strong { color: var(--white); font-weight: 500; }
+  .policy-text a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+  .policy-text a:hover { opacity: .75; }
+
+  /* Sub-sections */
+  .sub-section { margin-top: 2rem; }
+  .sub-title {
+    font-size: .82rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .sub-title .line { width: 24px; height: 1px; background: var(--gold); opacity: .5; }
+
+  /* Policy lists */
+  .policy-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: .8rem;
+    margin-top: .8rem;
+  }
+  .policy-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    font-size: 1rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1.7;
+  }
+  .policy-list li::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+    margin-top: .58rem;
+  }
+  .policy-list li strong { color: var(--white); font-weight: 500; }
+
+  /* Highlight box (used for contact / ICO) */
+  .info-box {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.6rem 2rem;
+    margin-top: 1.6rem;
+  }
+  .info-box p {
+    font-size: .95rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1.8;
+  }
+  .info-box p + p { margin-top: .5rem; }
+  .info-box p strong { color: var(--cream); font-weight: 500; }
+  .info-box a { color: var(--gold); text-decoration: none; }
+  .info-box a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #07111f;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5% 2rem;
+    text-align: center;
+  }
+  .footer-divider { width: 40px; height: 1px; background: var(--gold); opacity: .4; margin: 0 auto 1.6rem; }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 300; color: var(--white);
+    letter-spacing: .1em; margin-bottom: .5rem;
+  }
+  .footer-address {
+    font-size: .88rem; font-weight: 300; color: var(--text-muted);
+    line-height: 1.8; margin-bottom: 1.4rem;
+  }
+  .footer-address a { color: var(--gold); text-decoration: none; }
+  .footer-bottom-bar {
+    border-top: 1px solid var(--border); padding-top: 1.4rem;
+    font-size: .8rem; font-weight: 300;
+    color: rgba(138,155,181,.5); letter-spacing: .04em;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .policy-wrap { padding: 3.5rem 6% 5rem; }
+    .toc { padding: 1.8rem; }
+    .section-header { gap: .9rem; }
+    .section-num { font-size: 1.6rem; min-width: 2rem; }
+    nav { padding: .9rem 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-text">Clifton <span>Vision</span></span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Back to Site
+  </a>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="page-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>Legal &amp; Compliance</span>
+    </div>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="page-hero-meta">Effective date: June 2026 &nbsp;·&nbsp; Last reviewed: June 2026</p>
+  </div>
+</div>
+
+<!-- ── POLICY CONTENT ── -->
+<main class="policy-wrap">
+
+  <!-- Table of Contents -->
+  <div class="toc reveal">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#s1">Who We Are</a></li>
+      <li><a href="#s2">Information We Collect</a></li>
+      <li><a href="#s3">How We Use Your Information</a></li>
+      <li><a href="#s4">Sharing Your Information</a></li>
+      <li><a href="#s5">Cookies</a></li>
+      <li><a href="#s6">Data Retention</a></li>
+      <li><a href="#s7">Your Rights</a></li>
+      <li><a href="#s8">Security</a></li>
+      <li><a href="#s9">Children's Privacy</a></li>
+      <li><a href="#s10">Links to Other Websites</a></li>
+      <li><a href="#s11">Changes to This Policy</a></li>
+      <li><a href="#s12">Complaints</a></li>
+    </ol>
+  </div>
+
+  <!-- ── SECTION 1 ── -->
+  <div class="policy-section reveal" id="s1-wrap">
+    <span class="section-anchor" id="s1"></span>
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Who We Are</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision is an independent optician practice located at
+      <strong>174 Whiteladies Road, Clifton, Bristol</strong>. We provide professional eye care services,
+      dispensing of spectacles and contact lenses, and related optical products.
+    </p>
+    <p class="policy-text" style="margin-top:1rem;">
+      For the purposes of data protection law, Clifton Vision is the <strong>data controller</strong>
+      of the personal information we collect about you.
+    </p>
+    <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Post: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2 ── -->
+  <div class="policy-section reveal" id="s2-wrap">
+    <span class="section-anchor" id="s2"></span>
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Information We Collect</h2>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>Information you provide directly</div>
+      <ul class="policy-list">
+        <li>Name, date of birth, address, telephone number and email address</li>
+        <li>Optical and health records, including prescription details, ocular health history and general health information relevant to your eye care</li>
+        <li>Payment and billing information</li>
+        <li>Communications you send to us, including enquiries submitted via our website contact form or interest-registration form</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>Information collected automatically</div>
+      <ul class="policy-list">
+        <li>Website usage data collected through cookies and similar technologies, including pages visited, time spent on pages and referring URLs</li>
+        <li>Device and browser information (browser type, operating system, IP address)</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>Information from third parties</div>
+      <ul class="policy-list">
+        <li>Referral information from other healthcare providers (e.g. your GP or hospital ophthalmologist) where clinically relevant</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3 ── -->
+  <div class="policy-section reveal" id="s3-wrap">
+    <span class="section-anchor" id="s3"></span>
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">How We Use Your Information</h2>
+    </div>
+    <p class="policy-text">We process your personal data on the following legal bases:</p>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>To provide eye care services <em style="color:var(--text-muted);font-style:normal;font-size:.85em;">(Contract / Legitimate Interest)</em></div>
+      <ul class="policy-list">
+        <li>Creating and maintaining your clinical record</li>
+        <li>Carrying out eye examinations and issuing prescriptions</li>
+        <li>Dispensing spectacles, contact lenses and other optical appliances</li>
+        <li>Recalling you for routine appointments and follow-up care</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>To communicate with you <em style="color:var(--text-muted);font-style:normal;font-size:.85em;">(Consent / Legitimate Interest)</em></div>
+      <ul class="policy-list">
+        <li>Responding to website enquiries and contact form submissions</li>
+        <li>Sending appointment reminders and recall notices</li>
+        <li>Sending promotional information about our services, offers and new products where you have given consent</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>To comply with legal obligations <em style="color:var(--text-muted);font-style:normal;font-size:.85em;">(Legal Obligation)</em></div>
+      <ul class="policy-list">
+        <li>Retaining clinical records for the minimum periods required by NHS and professional guidelines</li>
+        <li>Responding to lawful requests from regulatory or law-enforcement bodies</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="line"></span>To improve our practice <em style="color:var(--text-muted);font-style:normal;font-size:.85em;">(Legitimate Interest)</em></div>
+      <ul class="policy-list">
+        <li>Analysing anonymised website and appointment data to improve our services</li>
+        <li>Managing the security and functionality of our website</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4 ── -->
+  <div class="policy-section reveal" id="s4-wrap">
+    <span class="section-anchor" id="s4"></span>
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Sharing Your Information</h2>
+    </div>
+    <p class="policy-text">We do not sell your personal data. We may share it with:</p>
+    <ul class="policy-list" style="margin-top:1.2rem;">
+      <li>Healthcare professionals involved in your care (e.g. GPs, hospital eye departments) where clinically necessary</li>
+      <li>Our optical suppliers and laboratories, solely to fulfil your order</li>
+      <li>IT and software service providers who support our practice management and website systems, under appropriate data processing agreements</li>
+      <li><strong>EmailJS</strong>, our website form delivery service used to route enquiries to our inbox</li>
+      <li>Regulatory bodies (e.g. the General Optical Council) or law-enforcement agencies where we are legally required to do so</li>
+    </ul>
+    <p class="policy-text" style="margin-top:1.2rem;">All third parties are required to handle your data securely and in accordance with applicable data protection law.</p>
+  </div>
+
+  <!-- ── SECTION 5 ── -->
+  <div class="policy-section reveal" id="s5-wrap">
+    <span class="section-anchor" id="s5"></span>
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Cookies</h2>
+    </div>
+    <p class="policy-text">Our website uses cookies to enhance your experience. Cookies are small text files placed on your device. We use:</p>
+    <ul class="policy-list" style="margin-top:1.2rem;">
+      <li><strong>Essential cookies</strong> — necessary for the website to function correctly</li>
+      <li><strong>Analytics cookies</strong> — to understand how visitors interact with our site (e.g. pages viewed, session duration)</li>
+    </ul>
+    <p class="policy-text" style="margin-top:1.2rem;">You can control and delete cookies through your browser settings. Disabling certain cookies may affect website functionality.</p>
+  </div>
+
+  <!-- ── SECTION 6 ── -->
+  <div class="policy-section reveal" id="s6-wrap">
+    <span class="section-anchor" id="s6"></span>
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Data Retention</h2>
+    </div>
+    <p class="policy-text">We retain personal data for as long as necessary to fulfil the purposes for which it was collected, and in accordance with professional and legal obligations:</p>
+    <ul class="policy-list" style="margin-top:1.2rem;">
+      <li><strong>Adult clinical records:</strong> a minimum of 10 years from the date of last entry (in line with General Optical Council guidance)</li>
+      <li><strong>Children's clinical records:</strong> retained until the patient reaches age 25, or 10 years from the date of last entry, whichever is longer</li>
+      <li><strong>Website enquiry data:</strong> up to 2 years, unless you ask us to remove it sooner</li>
+      <li><strong>Financial records:</strong> 6 years in accordance with HMRC requirements</li>
+    </ul>
+    <p class="policy-text" style="margin-top:1.2rem;">After the applicable retention period, data is securely destroyed.</p>
+  </div>
+
+  <!-- ── SECTION 7 ── -->
+  <div class="policy-section reveal" id="s7-wrap">
+    <span class="section-anchor" id="s7"></span>
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Your Rights</h2>
+    </div>
+    <p class="policy-text">Under UK data protection law (UK GDPR and the Data Protection Act 2018) you have the right to:</p>
+    <ul class="policy-list" style="margin-top:1.2rem;">
+      <li><strong>Access:</strong> request a copy of the personal data we hold about you</li>
+      <li><strong>Rectification:</strong> ask us to correct inaccurate or incomplete data</li>
+      <li><strong>Erasure:</strong> ask us to delete your data in certain circumstances</li>
+      <li><strong>Restriction:</strong> ask us to limit how we use your data</li>
+      <li><strong>Portability:</strong> receive your data in a structured, machine-readable format</li>
+      <li><strong>Object:</strong> object to processing based on legitimate interests or for direct marketing</li>
+      <li><strong>Withdraw consent:</strong> where processing is based on consent, you may withdraw it at any time without affecting the lawfulness of prior processing</li>
+    </ul>
+    <div class="info-box">
+      <p>To exercise any of these rights, please contact us at <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a>. We will respond within one calendar month. We may need to verify your identity before acting on a request.</p>
+    </div>
+  </div>
+
+  <!-- ── SECTION 8 ── -->
+  <div class="policy-section reveal" id="s8-wrap">
+    <span class="section-anchor" id="s8"></span>
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Security</h2>
+    </div>
+    <p class="policy-text">
+      We take reasonable technical and organisational measures to protect your personal data against
+      unauthorised access, accidental loss, destruction or damage. These include secure storage systems,
+      restricted access controls and encrypted communications where appropriate.
+    </p>
+    <p class="policy-text" style="margin-top:1rem;">
+      Whilst we take these measures seriously, no method of transmission over the internet is completely
+      secure. If you have concerns about the security of information you have shared with us, please
+      contact us immediately.
+    </p>
+  </div>
+
+  <!-- ── SECTION 9 ── -->
+  <div class="policy-section reveal" id="s9-wrap">
+    <span class="section-anchor" id="s9"></span>
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2 class="section-title">Children's Privacy</h2>
+    </div>
+    <p class="policy-text">
+      We provide eye care services to patients of all ages. Where a patient is under 16, we will seek
+      consent from a parent or guardian before collecting sensitive health information.
+    </p>
+    <p class="policy-text" style="margin-top:1rem;">
+      Our website is not directed at children and we do not knowingly collect personal data from anyone
+      under 16 via our website contact forms.
+    </p>
+  </div>
+
+  <!-- ── SECTION 10 ── -->
+  <div class="policy-section reveal" id="s10-wrap">
+    <span class="section-anchor" id="s10"></span>
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2 class="section-title">Links to Other Websites</h2>
+    </div>
+    <p class="policy-text">
+      Our website may contain links to third-party websites. We are not responsible for the privacy
+      practices of those sites and recommend you review their privacy policies before providing any
+      personal information.
+    </p>
+  </div>
+
+  <!-- ── SECTION 11 ── -->
+  <div class="policy-section reveal" id="s11-wrap">
+    <span class="section-anchor" id="s11"></span>
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2 class="section-title">Changes to This Policy</h2>
+    </div>
+    <p class="policy-text">
+      We may update this privacy policy from time to time. The most current version will always be
+      available on our website and in our practice. The effective date at the top of this document
+      will reflect the date of the most recent revision.
+    </p>
+    <p class="policy-text" style="margin-top:1rem;">
+      For material changes, we will notify you by email (if you are a registered patient) or by a
+      prominent notice on our website.
+    </p>
+  </div>
+
+  <!-- ── SECTION 12 ── -->
+  <div class="policy-section reveal" id="s12-wrap">
+    <span class="section-anchor" id="s12"></span>
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2 class="section-title">Complaints</h2>
+    </div>
+    <p class="policy-text">
+      If you have a concern about how we handle your personal data, please contact us in the first
+      instance at <a href="mailto:info@cliftonvision.co.uk" style="color:var(--gold);">info@cliftonvision.co.uk</a>.
+      We will endeavour to resolve any issue promptly and fairly.
+    </p>
+    <p class="policy-text" style="margin-top:1rem;">
+      You also have the right to lodge a complaint with the
+      <strong>Information Commissioner's Office (ICO)</strong>, the UK's independent data protection authority:
+    </p>
+    <div class="info-box">
+      <p><strong>Information Commissioner's Office</strong></p>
+      <p>Website: <a href="https://www.ico.org.uk" target="_blank" rel="noopener">www.ico.org.uk</a></p>
+      <p>Helpline: <a href="tel:03031231113">0303 123 1113</a></p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-divider"></div>
+  <div class="footer-name">Clifton Vision</div>
+  <div class="footer-address">
+    174 Whiteladies Road, Clifton, Bristol<br>
+    <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a>
+  </div>
+  <div class="footer-bottom-bar">
+    &copy; 2026 Clifton Vision &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+    <a href="index.html" style="color:var(--gold);text-decoration:none;">Back to main site</a>
+  </div>
+</footer>
+
+<!-- ── SCROLL REVEAL JS ── -->
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clifton Vision | Opticians & Dry Eye Clinic</title>
+<meta name="description" content="Clifton Vision — independent opticians and specialist dry eye clinic in Clifton, Bristol. Eye examinations, contact lenses, myopia control, dry eye treatments and Heart Eye screening.">
+<style>
+:root{
+  --navy:#10283a;
+  --navy2:#173b50;
+  --cream:#f5f0e8;
+  --warm:#e9dfd0;
+  --gold:#b99a63;
+  --ink:#1e2930;
+  --muted:#68747a;
+  --white:#fff;
+  --line:#d9d1c6;
+  --sage:#87998b;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.site-header{
+  position:sticky;top:0;z-index:20;background:rgba(16,40,58,.96);
+  color:white;border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px)
+}
+.nav{
+  max-width:1240px;margin:auto;padding:14px 28px;display:flex;align-items:center;gap:24px
+}
+.logo{display:flex;align-items:center;gap:12px;min-width:210px}
+.logo-mark{width:42px;height:28px;border:1.5px solid #fff;border-radius:50%;position:relative}
+.logo-mark:before,.logo-mark:after{content:"";position:absolute;top:12px;width:13px;height:1px;background:#fff}
+.logo-mark:before{left:-13px}.logo-mark:after{right:-13px}
+.logo-text{font-family:var(--serif);font-size:21px;letter-spacing:2px}
+.logo-sub{display:block;font-size:8px;letter-spacing:1.5px;font-family:var(--sans);margin-top:-2px}
+.navlinks{display:flex;gap:18px;align-items:center;justify-content:center;flex:1}
+.navlinks a{font-size:13px;letter-spacing:.3px;opacity:.9}
+.navlinks a:hover{opacity:1;color:#ead7b3}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 20px;border-radius:2px;border:1px solid var(--gold);
+  background:var(--gold);color:#17242c;font-weight:700;letter-spacing:.3px;cursor:pointer
+}
+.btn-outline{background:transparent;color:#fff}
+.btn-dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+.menu{display:none;background:none;border:0;color:#fff;font-size:25px}
+.hero{
+  min-height:720px;display:grid;grid-template-columns:1.15fr .85fr;
+  background:var(--navy);color:white
+}
+.hero-copy{padding:100px 7vw 80px;display:flex;flex-direction:column;justify-content:center}
+.kicker{text-transform:uppercase;letter-spacing:3px;font-size:11px;color:#d8c39b;font-weight:700}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;margin:0 0 20px}
+h1{font-size:clamp(48px,6vw,82px);max-width:700px}
+h2{font-size:clamp(36px,4vw,55px)}
+h3{font-size:26px}
+.hero p{font-size:18px;color:#d9e0e3;max-width:620px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.hero-image{
+  min-height:600px;position:relative;overflow:hidden;
+  background:
+   linear-gradient(135deg,rgba(16,40,58,.08),rgba(16,40,58,.65)),
+   radial-gradient(circle at 65% 28%,#e9dfd0 0 7%,transparent 7.5%),
+   linear-gradient(120deg,#b8aa98,#d7c9b7 48%,#8d8174);
+}
+.storefront{
+  position:absolute;inset:9% 10% 9% 9%;border:1px solid rgba(255,255,255,.45);
+  background:linear-gradient(180deg,rgba(245,240,232,.85),rgba(224,213,199,.7));
+  box-shadow:0 35px 80px rgba(0,0,0,.3)
+}
+.storefront .fascia{height:20%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:white;letter-spacing:3px;font-family:var(--serif);font-size:25px}
+.storefront .windows{height:57%;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#c6b7a3}
+.storefront .window{background:linear-gradient(145deg,#9bb0b7,#e7e2d8 55%,#728c96);position:relative}
+.storefront .window:after{content:"";position:absolute;inset:15%;border:1px solid rgba(255,255,255,.5)}
+.storefront .door{height:100%;background:linear-gradient(145deg,#304958,#b8c1be);border-left:1px solid #c6b7a3}
+.storefront .base{height:23%;background:#cbbda9;display:flex;align-items:center;justify-content:space-around}
+.chair{width:23%;height:44%;background:#7c7e78;border-radius:30% 30% 8% 8%}
+.bridge-line{position:absolute;bottom:25px;left:0;right:0;text-align:center;color:rgba(255,255,255,.65);font-size:11px;letter-spacing:2px}
+.section{padding:100px 7vw}
+.section.navy{background:var(--navy);color:#fff}
+.section.white{background:#fff}
+.section-header{max-width:760px;margin-bottom:48px}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.navy .lead{color:#d9e0e3}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.card{
+  background:#fff;border:1px solid var(--line);padding:30px;min-height:190px
+}
+.navy .card{background:#17384b;border-color:rgba(255,255,255,.12)}
+.card .num{font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:700;text-transform:uppercase}
+.card p{color:var(--muted);margin-bottom:0}.navy .card p{color:#d5dde0}
+.about{
+  display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center
+}
+.portrait{
+  min-height:460px;background:linear-gradient(145deg,#d8cdbd,#a3b0ab);
+  position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden
+}
+.portrait:before{content:"";width:220px;height:300px;background:#d9c9b8;border-radius:50% 50% 42% 42%;position:absolute;bottom:-25px}
+.portrait:after{content:"SAL JAFFE";position:absolute;bottom:28px;letter-spacing:4px;color:rgba(16,40,58,.75);font-weight:700}
+.booking{background:#e8dfd2;padding:70px 7vw}
+.booking-wrap{max-width:1120px;margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}
+.form{background:#fff;padding:34px;border:1px solid var(--line)}
+label{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;display:block;margin:0 0 7px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #cfc7bd;background:#fcfbf9;margin-bottom:17px;color:var(--ink)}
+textarea{min-height:100px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.price-table{width:100%;border-collapse:collapse;background:#fff}
+.price-table th,.price-table td{padding:18px 16px;border-bottom:1px solid var(--line);text-align:left}
+.price-table th{font-family:var(--serif);font-size:20px;font-weight:400}
+.price-table td:last-child{text-align:right;font-weight:700;color:var(--navy)}
+.members{margin-top:36px;background:var(--navy);color:#fff;padding:28px 30px;border-left:4px solid var(--gold)}
+.tag{display:inline-block;border:1px solid var(--gold);padding:7px 11px;margin:5px 5px 0 0;font-size:12px;color:var(--gold)}
+.page-hero{padding:90px 7vw 70px;background:var(--navy);color:#fff}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.feature-img{
+  min-height:340px;background:
+  radial-gradient(circle at 70% 35%,rgba(255,255,255,.25),transparent 12%),
+  linear-gradient(145deg,#233f4e,#87999a);
+  position:relative;overflow:hidden
+}
+.feature-img:after{content:"CLIFTON VISION";position:absolute;right:24px;bottom:20px;color:rgba(255,255,255,.65);letter-spacing:3px;font-family:var(--serif)}
+.icon-box{background:var(--cream);padding:30px;border:1px solid var(--line)}
+footer{background:#0c1e2a;color:#dbe1e3;padding:55px 7vw}
+.footer-grid{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
+footer h3{color:#fff;font-size:24px}
+footer p,footer a{color:#b8c4c9;font-size:14px}
+.bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:35px;padding-top:20px;font-size:12px;color:#829198}
+@media(max-width:950px){
+  .navlinks{display:none}.menu{display:block;margin-left:auto}
+  .hero{grid-template-columns:1fr}.hero-image{min-height:420px}.hero-copy{padding-top:70px}
+  .grid{grid-template-columns:1fr 1fr}.about,.booking-wrap,.feature{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .nav{padding:12px 18px}.logo{min-width:0}.logo-text{font-size:18px}
+  .grid,.grid2,.form-grid,.footer-grid{grid-template-columns:1fr}
+  .section,.booking{padding:70px 6vw}.page-hero{padding:70px 6vw 55px}
+  h1{font-size:48px}.hero-copy{padding:65px 6vw}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" aria-label="Clifton Vision home">
+<img src="CV logo2.png" alt="Clifton Vision" style="height:78px;width:78px;object-fit:contain;border-radius:50%;border:2.5px solid rgba(201,168,76,0.5);drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
+
+    <!--  <span class="logo-mark"></span>
+      <span><span class="logo-text">CLIFTON VISION</span><span class="logo-sub">OPTICIANS · DRY EYE CLINIC</span></span> -->
+    </a>
+    <div class="navlinks">
+      <a href="#eye-exam">Eye Exam</a>
+      <a href="#dry-eye">Dry Eye</a>
+      <a href="#contact-lenses">Contact Lenses</a>
+      <a href="#myopia">Myopia Control</a>
+      <a href="#heart-eye">Heart Eye</a>
+      <a href="#prices">Prices</a>
+    </div>
+    <a class="btn" href="index.html#booking">Book an appointment</a>
+    <button class="menu" aria-label="Open menu">☰</button>
+  </nav>
+</header>
+
+<!--
+<main id="home">
+<section class="hero">
+  <div class="hero-copy">
+    <div class="kicker">Independent opticians · Clifton, Bristol</div>
+    <h1>A new look at eye care.</h1>
+    <p>Expert optometry, specialist dry eye care and advanced eye health screening in a beautiful independent clinic on Whiteladies Road.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#book">Book an appointment</a>
+      <a class="btn btn-outline" href="#eye-exam">Explore our services</a>
+    </div>
+    <p style="font-size:13px;margin-top:28px;color:#bfc9cc">
+      174 Whiteladies Road, Clifton, Bristol, BS8 2XU<br>
+      info@cliftonvision.co.uk · 07400 788551
+    </p>
+  </div>
+  <div class="hero-image" aria-label="Stylised practice image placeholder">
+    <div class="storefront">
+      <div class="fascia">CLIFTON VISION</div>
+      <div class="windows"><div class="window"></div><div class="window"><div class="door"></div></div></div>
+      <div class="base"><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
+    </div>
+    <div class="bridge-line">WHITELADIES ROAD · CLIFTON · BRISTOL</div>
+  </div>
+</section>
+
+<section class="section white">
+  <div class="section-header">
+    <div class="kicker">Meet your optometrist</div>
+    <h2>Expert eyes. Personal care.</h2>
+  </div>
+  <div class="about">
+    <div class="portrait" aria-label="Portrait placeholder for Sal Jaffe"></div>
+    <div>
+      <h3>Sal Jaffe</h3>
+      <p class="lead">Optometrist &amp; Dry Eye Specialist</p>
+      <p>Clifton Vision was created by Sal Jaffe to bring together advanced optometry, specialist dry eye care and a more personal approach to eye health.</p>
+      <p>Every consultation is designed to understand the individual behind the prescription — from detailed eye health assessment and contact lenses to dry eye diagnostics, myopia control and Heart Eye screening.</p>
+      <div style="margin-top:22px">
+        <span class="tag">Independent</span><span class="tag">Advanced diagnostics</span><span class="tag">Dry eye specialist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section navy">
+  <div class="section-header">
+    <div class="kicker">What we offer</div>
+    <h2>Specialist care, all under one roof.</h2>
+    <p class="lead">From routine vision to advanced diagnostics and treatment, Clifton Vision combines clinical expertise with a calm, considered experience.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="#eye-exam"><div class="num">01 · Eye health</div><h3>Private Eye Exams</h3><p>Advanced assessment using OCT, biometric eye scanning and antioxidant screening.</p></a>
+    <a class="card" href="#dry-eye"><div class="num">02 · Dry eye clinic</div><h3>Dry Eye</h3><p>Detailed diagnosis and tailored treatment including IPL, RF and ZEST.</p></a>
+    <a class="card" href="#contact-lenses"><div class="num">03 · Vision correction</div><h3>Contact Lenses</h3><p>Soft, RGP, hybrid and Ortho-K contact lens options.</p></a>
+    <a class="card" href="#myopia"><div class="num">04 · Children</div><h3>Myopia Control</h3><p>Evidence-led options in spectacles, soft contact lenses and Ortho-K.</p></a>
+    <a class="card" href="#heart-eye"><div class="num">05 · Whole-body health</div><h3>Heart Eye</h3><p>Eye-based cardiovascular risk screening with Heart Eye by Dr Noon.</p></a>
+    <a class="card" href="#prices"><div class="num">06 · Transparent care</div><h3>Prices</h3><p>Clear pricing for our core consultations, diagnostics and treatments.</p></a>
+  </div>
+</section>
+
+<section class="booking" id="book">
+  <div class="booking-wrap">
+    <div>
+      <div class="kicker">Appointments</div>
+      <h2>Tell us how we can help.</h2>
+      <p class="lead">Choose the appointment you'd like to request and we'll be in touch to arrange a convenient time.</p>
+      <p><strong>Clifton Vision</strong><br>174 Whiteladies Road<br>Clifton, Bristol, BS8 2XU</p>
+      <p><a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a><br><a href="tel:07400788551">07400 788551</a></p>
+    </div>
+    <form class="form" onsubmit="event.preventDefault(); alert('Thank you. Your appointment request has been recorded in this demo. Connect this form to your booking/email system before launch.');">
+      <div class="form-grid">
+        <div><label for="name">Name</label><input id="name" required></div>
+        <div><label for="phone">Phone</label><input id="phone" required></div>
+      </div>
+      <label for="email">Email</label><input id="email" type="email" required>
+      <label for="service">I would like to request</label>
+      <select id="service" required>
+        <option value="">Please select</option>
+        <option>Private Eye Exam</option>
+        <option>Dry Eye Consultation</option>
+        <option>Contact Lens Fit</option>
+        <option>Contact Lens Aftercare</option>
+        <option>Children's Eye Exam</option>
+        <option>IPL</option>
+        <option>Radiofrequency</option>
+        <option>ZEST</option>
+        <option>Heart Eye Screening</option>
+      </select>
+      <label for="message">Anything you'd like us to know?</label>
+      <textarea id="message" placeholder="Preferred days/times, symptoms or any other information..."></textarea>
+      <button class="btn btn-dark" type="submit">Request appointment</button>
+    </form>
+  </div>
+</section>
+</main>
+
+-->
+
+<section id="eye-exam">
+  <div class="page-hero">
+    <div class="kicker">The Eye Exam</div>
+    <h1>More than a prescription.</h1>
+    <p class="lead">A comprehensive private eye examination combining clinical expertise with advanced technology to look beyond what you can see.</p>
+  </div>
+  <div class="section white">
+    <div class="grid">
+      <div class="card"><div class="num">Canon</div><h3>Xephilio OCT R1</h3><p>High-resolution OCT imaging provides detailed views of the retina and optic nerve, helping us assess eye health in greater depth.</p></div>
+      <div class="card"><div class="num">Rodenstock DNEye Scanner</div><h3>Biometric Eye Scanner</h3><p>Advanced biometric measurements help us understand the unique optical characteristics of your eyes and support precise spectacle and lens solutions.</p></div>
+      <div class="card"><div class="num">Prysm iO</div><h3>Antioxidant Scan</h3><p>A specialist screening tool used to assess antioxidant status as part of a broader conversation about eye and overall wellbeing.</p></div>
+    </div>
+    <div class="feature" style="margin-top:60px">
+      <div class="feature-img"></div>
+      <div class="icon-box">
+        <div class="kicker">Our approach</div>
+        <h2>Time to understand your eyes.</h2>
+        <p>We don't believe in rushing an eye examination. Your appointment is an opportunity to understand your vision, discuss your lifestyle and identify anything that may need further investigation.</p>
+        <p>Where appropriate, we can use advanced imaging and screening to give you a clearer picture of your eye health.</p>
+        <a class="btn btn-dark" href="index.html#booking">Book an eye exam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dry-eye">
+  <div class="page-hero">
+    <div class="kicker">Dry Eye Clinic</div>
+    <h1>Comfortable eyes. Better days.</h1>
+    <p class="lead">A detailed dry eye consultation designed to understand why your eyes feel dry, gritty, watery, tired or irritated — and what can be done.</p>
+  </div>
+  <div class="section white">
+    <div class="section-header"><h2>Your consultation</h2><p class="lead">We combine symptoms, clinical examination and imaging to build a picture of your tear film, eyelids and meibomian glands.</p></div>
+    <div class="grid">
+      <div class="card"><div class="num">Imaging</div><h3>Observ 520x</h3><p>Advanced external eye and skin analysis to help assess visible signs around the eyelids and ocular surface.</p></div>
+      <div class="card"><div class="num">Meibography</div><h3>Meibomian glands</h3><p>Imaging of the meibomian glands helps us assess gland structure and identify changes associated with meibomian gland dysfunction.</p></div>
+      <div class="card"><div class="num">Tear film</div><h3>Schirmer test</h3><p>Measures tear production and helps assess the aqueous component of the tear film.</p></div>
+      <div class="card"><div class="num">Ocular surface</div><h3>Fluorescein test</h3><p>A diagnostic dye is used to assess tear-film behaviour and highlight areas of ocular surface staining.</p></div>
+      <div class="card"><div class="num">Clinical exam</div><h3>Slit lamp examination</h3><p>Detailed examination of the eyelids, lashes, tear film, conjunctiva and cornea under magnification.</p></div>
+      <div class="card"><div class="num">Outcome</div><h3>Personalised plan</h3><p>We explain what we find and discuss the treatment options most appropriate for your eyes and lifestyle.</p></div>
+    </div>
+  </div>
+
+  <div class="section navy">
+    <div class="section-header"><div class="kicker">Advanced treatment</div><h2>Targeted treatment for dry eye.</h2></div>
+    <div class="grid">
+      <div class="card"><div class="num">Envision by InMode</div><h3>IPL</h3><p>Intense Pulsed Light is used as part of a specialist dry eye treatment programme, particularly where inflammation and meibomian gland dysfunction are contributing to symptoms.</p><p><strong>Minimum course of 3: £900 <br> 4th (recommended): £100</strong></p></div>
+      <div class="card"><div class="num">Envision by InMode</div><h3>Radiofrequency</h3><p>Radiofrequency treatment uses controlled thermal energy to support the eyelid and meibomian gland environment as part of a tailored dry eye programme.</p><p><strong>Minimum Course of 3: £900 <br> 4th (recommended): £100</strong></p></div>
+      <div class="card"><div class="num">The Body Doctor</div><h3>ZEST Eye Clean</h3><p>A specialist eyelid cleansing treatment designed to deeply cleanse the eyelid margins and support healthier eyelid hygiene.</p><p><strong>£250</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-lenses">
+  <div class="page-hero">
+    <div class="kicker">Contact Lenses</div>
+    <h1>Freedom to see your way.</h1>
+    <p class="lead">Contact lens fitting tailored to your prescription, eyes, lifestyle and visual priorities.</p>
+  </div>
+  <div class="section white">
+    <div class="grid">
+      <div class="card"><div class="num">Soft</div><h3>Soft contact lenses</h3><p>Comfortable, flexible lenses for a wide range of prescriptions and lifestyles.</p></div>
+      <div class="card"><div class="num">RGP</div><h3>RGP contact lenses</h3><p>Rigid gas permeable lenses for patients who may benefit from crisp, stable optics and specialist fitting.</p></div>
+      <div class="card"><div class="num">Hybrid</div><h3>Hybrid contact lenses</h3><p>A combination of a rigid optical centre and soft outer skirt, offering an alternative for selected prescriptions and corneal shapes.</p></div>
+      <div class="card"><div class="num">Overnight vision correction</div><h3>Ortho-K</h3><p>Specialist overnight lenses designed to temporarily reshape the cornea and provide daytime vision without conventional lenses.</p></div>
+    </div>
+    <div class="icon-box" style="margin-top:35px">
+      <h3>Contact lens care</h3>
+      <p>We offer both contact lens fitting and ongoing aftercare, so your lenses remain comfortable, healthy and appropriate for your eyes.</p>
+      <a class="btn btn-dark" href="index.html#booking">Request a contact lens appointment</a>
+    </div>
+  </div>
+</section>
+
+<section id="myopia">
+  <div class="page-hero">
+    <div class="kicker">Myopia Control</div>
+    <h1>Helping children see clearly — now and into the future.</h1>
+    <p class="lead">Myopia is short-sightedness. We offer specialist options designed to help manage myopia progression in children and young people.</p>
+  </div>
+  <div class="section white">
+    <div class="feature">
+      <div class="icon-box">
+        <div class="kicker">What is myopia?</div>
+        <h2>When distant vision becomes blurred.</h2>
+        <p>Myopia occurs when the eye focuses light in front of the retina rather than directly on it. This usually makes distant objects appear blurred while close objects remain clearer.</p>
+        <div style="margin-top:20px">
+          <span class="tag">Children</span><span class="tag">Young people</span><span class="tag">Progression management</span>
+        </div>
+      </div>
+      <div class="feature-img"></div>
+    </div>
+    <div style="margin-top:70px">
+      <div class="section-header"><div class="kicker">Our options</div><h2>Myopia control, tailored to the child.</h2></div>
+      <div class="grid">
+        <div class="card"><div class="num">01</div><h3>Myopia-control spectacles</h3><p>Specialist spectacle lens options designed to provide clear vision while helping manage myopia progression.</p></div>
+        <div class="card"><div class="num">02</div><h3>Soft contact lenses</h3><p>Specialist myopia-control contact lenses may provide an effective, convenient option for suitable children.</p></div>
+        <div class="card"><div class="num">03</div><h3>Ortho-K</h3><p>Overnight orthokeratology can provide daytime vision correction and may be used as part of a myopia-management strategy.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="heart-eye">
+  <div class="page-hero">
+    <div class="kicker">Heart Eye</div>
+    <h1>Your eyes can tell a bigger health story.</h1>
+    <p class="lead">Heart Eye by Dr Noon uses information from the eye to support cardiovascular risk assessment.</p>
+  </div>
+  <div class="section white">
+    <div class="feature">
+      <div class="feature-img"></div>
+      <div class="icon-box">
+        <div class="kicker">Heart Eye screening</div>
+        <h2>Look beyond vision.</h2>
+        <p>The eye contains a unique network of tiny blood vessels. Heart Eye screening uses retinal information as part of a wider assessment of cardiovascular health and risk.</p>
+        <p>At Clifton Vision, we can discuss whether Heart Eye screening is appropriate for you and explain your results in the context of your wider eye examination.</p>
+        <a class="btn btn-dark" href="index.html#book">Request Heart Eye screening</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prices">
+  <div class="page-hero">
+    <div class="kicker">Prices</div>
+    <h1>Clear, straightforward pricing.</h1>
+    <p class="lead">We believe you should know what your care costs before you book.</p>
+  </div>
+  <div class="section white">
+    <table class="price-table">
+      <tbody>
+        <tr><th>Private Eye Exam</th><td>£120</td></tr>
+        <tr><th>Children's Eye Exam</th><td>£60</td></tr>
+        <tr><th>Contact Lens Fit</th><td>£50</td></tr>
+        <tr><th>Contact Lens Aftercare</th><td>£70</td></tr>
+        <tr><th>Dry Eye Consultation</th><td>£70</td></tr>
+        <tr><th>IPL — course of 3</th><td>£900</td></tr>
+        <tr><th>IPL — 4th treatment</th><td>£100</td></tr>
+        <tr><th>Radiofrequency — course of 3</th><td>£900</td></tr>
+        <tr><th>Radiofrequency — 4th treatment</th><td>£100</td></tr>
+        <tr><th>ZEST Eye Clean</th><td>£250</td></tr>
+      </tbody>
+    </table>
+    <div class="members">
+      <strong>Clifton Vision Members</strong><br>
+      Clifton Vision Members are entitled to complimentary eye exams and discounts across products and services.
+    </div>
+    <div style="margin-top:40px"><a class="btn btn-dark" href="index.html#booking">Book an appointment</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><h3>Clifton Vision</h3><p>Opticians. Dry Eye Clinic.</p><p>174 Whiteladies Road<br>Clifton, Bristol, BS8 2XU</p></div>
+    <div><h3>Contact</h3><p><a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p><p><a href="tel:01172565023">0117 256 5023</a></p><p><a href="index.html#booking">Request an appointment</a></p></div>
+    <div><h3>Explore</h3><p><a href="#eye-exam">Eye Exam</a><br><a href="#dry-eye">Dry Eye Clinic</a><br><a href="#contact-lenses">Contact Lenses</a><br><a href="#myopia">Myopia Control</a><br><a href="#heart-eye">Heart Eye</a><br><a href="#prices">Prices</a></p></div>
+  </div>
+  <div class="bottom">© 2026 Clifton Vision · Independent opticians and dry eye clinic.</div>
+</footer>
+
+<script>
+document.querySelector('.menu').addEventListener('click', () => {
+  const links = document.querySelector('.navlinks');
+  const visible = links.style.display === 'flex';
+  links.style.display = visible ? '' : 'flex';
+  links.style.position = 'absolute';
+  links.style.top = '68px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = '#10283a';
+  links.style.padding = '18px';
+  links.style.flexDirection = 'column';
+});
+</script>
+</body>
+</html>

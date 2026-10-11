@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asks Questions — Clifton Vision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #152540;
+    --navy-light: #1e3454;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --text-muted: #8a9bb5;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 17px; }
+  body { font-family: 'Jost', sans-serif; background: var(--navy); color: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13,27,46,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; gap: .75rem; }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--white); letter-spacing: .06em;
+  }
+  .nav-logo-text span { color: var(--gold); }
+
+  .nav-back {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: .6rem 1.4rem;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: .85rem; font-weight: 400;
+    letter-spacing: .14em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background .25s, color .25s;
+    cursor: pointer;
+  }
+  .nav-back:hover { background: var(--gold); color: var(--navy); }
+  .nav-back svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform .25s; }
+  .nav-back:hover svg { transform: translateX(-3px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    min-height: 38vh;
+    display: flex; align-items: flex-end;
+    position: relative; overflow: hidden;
+    padding: 9rem 5% 4rem;
+    background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%),
+                linear-gradient(160deg, #0d1b2e 0%, #152540 50%, #0d1b2e 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: .04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .page-eyebrow {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem;
+  }
+  .page-eyebrow span {
+    font-size: .82rem; font-weight: 400; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .eyebrow-line { width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-weight: 300; line-height: 1.08;
+    color: var(--white); letter-spacing: -.01em;
+    margin-bottom: 1rem;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--gold-light); }
+  .page-hero-meta {
+    font-size: .88rem; font-weight: 300;
+    color: var(--text-muted); letter-spacing: .06em;
+    margin-top: .6rem;
+  }
+
+  /* ── POLICY BODY ── */
+  .policy-wrap {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 5% 7rem;
+  }
+
+
+
+  /* Table of Contents */
+  .toc {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.4rem 2.8rem;
+    margin-bottom: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .toc::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .toc-title {
+    font-size: .82rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .toc-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .toc ol {
+    list-style: none; display: flex; flex-direction: column; gap: .6rem;
+    counter-reset: toc-counter;
+  }
+  .toc ol li { counter-increment: toc-counter; display: flex; align-items: baseline; gap: .75rem; }
+  .toc ol li::before {
+    content: counter(toc-counter, decimal-leading-zero);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: .95rem; color: var(--gold); opacity: .7;
+    min-width: 28px; flex-shrink: 0;
+  }
+  .toc ol li a {
+    font-size: .95rem; font-weight: 300; color: var(--text-muted);
+    text-decoration: none; transition: color .2s;
+  }
+  .toc ol li a:hover { color: var(--gold); }
+
+  /* Section blocks */
+  .policy-section { margin-bottom: 3.8rem; }
+  .policy-section:last-child { margin-bottom: 0; }
+
+  .section-anchor { display: block; height: 90px; margin-top: -90px; visibility: hidden; }
+
+  .section-header {
+    display: flex; align-items: flex-start; gap: 1.4rem;
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; color: var(--gold); opacity: .6;
+    line-height: 1; flex-shrink: 0; min-width: 2.8rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 300; color: var(--white); line-height: 1.15;
+  }
+
+  .policy-text {
+    font-size: 1rem; font-weight: 300; line-height: 1.9;
+    color: var(--text-muted);
+  }
+  .policy-text + .policy-text { margin-top: 1rem; }
+  .policy-text strong { color: var(--white); font-weight: 500; }
+  .policy-text a { color: var(--gold); text-decoration: none; transition: opacity .2s; }
+  .policy-text a:hover { opacity: .75; }
+
+  /* Sub-sections */
+  .sub-section { margin-top: 2rem; }
+  .sub-title {
+    font-size: .82rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .sub-title .line { width: 24px; height: 1px; background: var(--gold); opacity: .5; }
+
+  /* Policy lists */
+  .policy-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: .8rem;
+    margin-top: .8rem;
+  }
+  .policy-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    font-size: 1rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1.7;
+  }
+  .policy-list li::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+    margin-top: .58rem;
+  }
+  .policy-list li strong { color: var(--white); font-weight: 500; }
+
+  /* Highlight box (used for contact / ICO) */
+  .info-box {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.6rem 2rem;
+    margin-top: 1.6rem;
+  }
+  .info-box p {
+    font-size: .95rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1.8;
+  }
+  .info-box p + p { margin-top: .5rem; }
+  .info-box p strong { color: var(--cream); font-weight: 500; }
+  .info-box a { color: var(--gold); text-decoration: none; }
+  .info-box a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #07111f;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5% 2rem;
+    text-align: center;
+  }
+  .footer-divider { width: 40px; height: 1px; background: var(--gold); opacity: .4; margin: 0 auto 1.6rem; }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 300; color: var(--white);
+    letter-spacing: .1em; margin-bottom: .5rem;
+  }
+  .footer-address {
+    font-size: .88rem; font-weight: 300; color: var(--text-muted);
+    line-height: 1.8; margin-bottom: 1.4rem;
+  }
+  .footer-address a { color: var(--gold); text-decoration: none; }
+  .footer-bottom-bar {
+    border-top: 1px solid var(--border); padding-top: 1.4rem;
+    font-size: .8rem; font-weight: 300;
+    color: rgba(138,155,181,.5); letter-spacing: .04em;
+  }
+
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .policy-wrap { padding: 3.5rem 6% 5rem; }
+    .toc { padding: 1.8rem; }
+    .section-header { gap: .9rem; }
+    .section-num { font-size: 1.6rem; min-width: 2rem; }
+    nav { padding: .9rem 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-text">Clifton <span>Vision</span></span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Back to Site
+  </a>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-content">
+    <div class="page-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span>Frequently Asked Questions</span>
+    </div>
+    <h1>FAQs</h1>
+    <p class="page-hero-meta">Effective date: October 2026 &nbsp;·&nbsp; Last reviewed: October 2026</p>
+  </div>
+</div>
+
+<!-- ── POLICY CONTENT ── -->
+<main class="policy-wrap">
+
+  <!-- Table of Contents -->
+  <div class="toc reveal">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#s1">Where is Clifton Vision and are you a local opticians in Bristol?</a></li>
+      <li><a href="#s2">What is the nearest opticians to me in Bristol?</a></li>
+      <li><a href="#s3">What are the best opticians in Clifton?</a></li>
+      <li><a href="#s4">Is Clifton Vision the most beautiful opticians practice in Bristol?</a></li>
+      <li><a href="#s5">Where can I get the best experience in an opticians in Bristol?</a></li>
+      <li><a href="#s6">What advanced dry eye treatments does Clifton Vision offer?</a></li>
+      <li><a href="#s7">Does Clifton Vision offer radiofrequency for dry eye?</a></li>
+      <li><a href="#s8">Does Clifton Vision offer IPL for dry eye?</a></li>
+      <li><a href="#s9">Do you offer dry eye treatments for all skin types, from very fair to very dark?</a></li>
+      <li><a href="#s10">How is dry eye diagnosed at Clifton Vision?</a></li>
+      <li><a href="#s11">Does Clifton Vision offer designer frames?</a></li>
+      <li><a href="#s12">Which designer eyewear brands does Clifton Vision stock?</a></li>
+      <li><a href="#s13">Who sells CARON eyewear in Bristol?</a></li>
+      <li><a href="#s14">Who has the best equipment to check for retinal detachment?</a></li>
+      <li><a href="#s15">Who has the best equipment to check for corneal eye disease?</a></li>
+      <li><a href="#s16">Who has an anterior OCT in Bristol?</a></li>
+      <li><a href="#s17">Who has the best equipment to check for macular degeneration?</a></li>
+      <li><a href="#s18">Who has the best equipment to check for glaucoma?</a></li>
+      <li><a href="#s19">Can Clifton Vision check for cataracts?</a></li>
+      <li><a href="#s20">Who can give the best advice about supplements for eye health and dry eye?</a></li>
+      <li><a href="#s21">Who offers Heart Eye screening in Bristol?</a></li>
+      <li><a href="#s22">What is a Heart Eye screening?</a></li>
+      <li><a href="#s23">Why choose Clifton Vision for advanced eye care in Bristol?</a></li>
+      <li><a href="#s24">How do I book an appointment at Clifton Vision?</a></li>
+
+    </ol>
+  </div>
+
+  <!-- ── SECTION 1 ── -->
+  <div class="policy-section reveal" id="s1-wrap">
+    <span class="section-anchor" id="s1"></span>
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Where is Clifton Vision and are you a local opticians in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Yes. Clifton Vision is an independent opticians and dry eye clinic at
+      <strong>174 Whiteladies Road, Clifton, Bristol</strong>. We offer private eye examinations, children’s eye examinations, contact lens services, 
+advanced dry eye consultations, dry eye treatments and specialist eye-health screening.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 2 ── -->
+  <div class="policy-section reveal" id="s2-wrap">
+    <span class="section-anchor" id="s2"></span>
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">What is the nearest opticians to me in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      If you are searching for a local opticians in Bristol, Clifton Vision is conveniently located on Whiteladies Road in Clifton. 
+We welcome patients from Clifton and across Bristol who are looking for a more personal, technology-led and specialist approach to eye care.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 3 ── -->
+  <div class="policy-section reveal" id="s3-wrap">
+    <span class="section-anchor" id="s3"></span>
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">What are the best opticians in Clifton?</h2>
+    </div>
+    <p class="policy-text">
+      Choosing an opticians is about more than a sight test. At Clifton Vision, we combine advanced diagnostic technology, specialist dry eye expertise, 
+personalised clinical care and a carefully curated eyewear collection. Our aim is to make every visit feel considered, informative and genuinely enjoyable.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 4 ── -->
+  <div class="policy-section reveal" id="s4-wrap">
+    <span class="section-anchor" id="s4"></span>
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Is Clifton Vision the most beautiful opticians practice in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision has been designed to feel different from a traditional opticians. The practice combines a contemporary, welcoming interior with premium eyewear and a calm clinical environment. 
+We believe eye care can be both clinically thorough and beautifully presented.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 5 ── -->
+  <div class="policy-section reveal" id="s5-wrap">
+    <span class="section-anchor" id="s5"></span>
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Where can I get the best experience in an opticians in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Our approach is centred on time, personal attention and technology. Rather than simply checking whether you can read the letters on a chart, we look at the health of your eyes, listen to your concerns and explain what we find. Depending on the appointment, advanced imaging and measurements can help us build a more detailed picture of your eye health.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 6 ── -->
+  <div class="policy-section reveal" id="s6-wrap">
+    <span class="section-anchor" id="s6"></span>
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">What advanced dry eye treatments does Clifton Vision offer?</h2>
+    </div>
+    <p class="policy-text">
+      Our dry eye clinic provides detailed assessment and treatment planning for people with dry, gritty, burning, watery or uncomfortable eyes. Treatment may include IPL (Intense Pulsed Light), radiofrequency and ZEST antimicrobial treatment, depending on the findings of your assessment. Treatment is personalised rather than one-size-fits-all.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 7 ── -->
+  <div class="policy-section reveal" id="s7-wrap">
+    <span class="section-anchor" id="s7"></span>
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Does Clifton Vision offer radiofrequency for dry eye?</h2>
+    </div>
+    <p class="policy-text">
+      Yes. Radiofrequency can form part of an advanced dry eye treatment programme. It uses controlled radiofrequency energy around the periocular area and may be used alongside other treatments where clinically appropriate. Your suitability is assessed during your dry eye consultation.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 8 ── -->
+  <div class="policy-section reveal" id="s8-wrap">
+    <span class="section-anchor" id="s8"></span>
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Does Clifton Vision offer IPL for dry eye?</h2>
+    </div>
+    <p class="policy-text">
+      Yes. Clifton Vision offers IPL for appropriate dry eye patients. IPL may be used as part of a treatment programme for evaporative dry eye and meibomian gland dysfunction. We first assess the eyes and eyelids to determine whether IPL is appropriate for you.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 9 ── -->
+  <div class="policy-section reveal" id="s9-wrap">
+    <span class="section-anchor" id="s9"></span>
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2 class="section-title">Do you offer dry eye treatments for all skin types, from very fair to very dark?</h2>
+    </div>
+    <p class="policy-text">
+      We assess every patient individually. IPL settings and suitability need to take skin pigmentation and other clinical factors into account, so treatment is tailored carefully rather than using the same settings for everyone. During your consultation we can discuss the safest and most appropriate options for your skin type and dry eye condition.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 10 ── -->
+  <div class="policy-section reveal" id="s10-wrap">
+    <span class="section-anchor" id="s10"></span>
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2 class="section-title">How is dry eye diagnosed at Clifton Vision?</h2>
+    </div>
+    <p class="policy-text">
+      A detailed dry eye assessment can include external eye and eyelid imaging, assessment of the meibomian glands, tear-film assessment with fluorescein, Schirmer’s testing where indicated, and imaging such as the Observ 520x. The aim is to identify contributing factors and create a personalised treatment plan.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 11 ── -->
+  <div class="policy-section reveal" id="s11-wrap">
+    <span class="section-anchor" id="s11"></span>
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2 class="section-title">Does Clifton Vision offer designer frames?</h2>
+    </div>
+    <p class="policy-text">
+      Yes. Clifton Vision has a curated collection of designer and independent eyewear, selected for design, quality and individuality. We aim to help you find frames that suit your prescription, face shape, personal style and lifestyle.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 12 ── -->
+  <div class="policy-section reveal" id="s12-wrap">
+    <span class="section-anchor" id="s12"></span>
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2 class="section-title">Which designer eyewear brands does Clifton Vision stock?</h2>
+    </div>
+    <p class="policy-text">
+      Our designer collection includes brands such as Cartier, LINDBERG, DITA Lancier, Maui Jim, Movitra, Tommy Hilfiger, Kate Spade, Land Rover, Aspinal of London, Sunday Somewhere, Taylor Morris, Marc Jacobs, Caron and Missoni. Availability can change, so please contact us if you are looking for a particular frame or collection.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 13 ── -->
+  <div class="policy-section reveal" id="s13-wrap">
+    <span class="section-anchor" id="s13"></span>
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <h2 class="section-title">Who sells CARON eyewear in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision is a destination for premium and designer eyewear in Clifton, Bristol. If you are specifically looking for CARON eyewear, please contact us to check current availability and the latest collection.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 14 ── -->
+  <div class="policy-section reveal" id="s14-wrap">
+    <span class="section-anchor" id="s14"></span>
+    <div class="section-header">
+      <span class="section-num">14</span>
+      <h2 class="section-title">Who has the best equipment to check for retinal detachment?</h2>
+    </div>
+    <p class="policy-text">
+      A retinal detachment requires a clinical assessment rather than relying on a single piece of equipment. At Clifton Vision, advanced retinal imaging can support a comprehensive eye examination, including wide-field retinal imaging and OCT where appropriate. If symptoms or examination findings suggest a retinal detachment or other urgent retinal problem, we will advise you about the appropriate urgent referral.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 15 ── -->
+  <div class="policy-section reveal" id="s15-wrap">
+    <span class="section-anchor" id="s15"></span>
+    <div class="section-header">
+      <span class="section-num">15</span>
+      <h2 class="section-title">Who has the best equipment to check for corneal eye disease?</h2>
+    </div>
+    <p class="policy-text">
+      Corneal conditions require examination of the front of the eye as well as assessment of vision and the ocular surface. Clifton Vision uses modern clinical examination and imaging technology as part of a detailed assessment. If a condition requires specialist corneal investigation or treatment beyond the practice, we will arrange or recommend appropriate ophthalmology care.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 16 ── -->
+  <div class="policy-section reveal" id="s16-wrap">
+    <span class="section-anchor" id="s16"></span>
+    <div class="section-header">
+      <span class="section-num">16</span>
+      <h2 class="section-title">Who has an anterior OCT in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision has OCT technology that can support detailed imaging of ocular structures. OCT is primarily associated with retinal imaging, but anterior-segment imaging capabilities depend on the specific scan and clinical indication. If you are looking for assessment of the cornea or anterior eye, contact us to discuss whether our imaging is appropriate for your particular concern.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 17 ── -->
+  <div class="policy-section reveal" id="s17-wrap">
+    <span class="section-anchor" id="s17"></span>
+    <div class="section-header">
+      <span class="section-num">17</span>
+      <h2 class="section-title">Who has the best equipment to check for macular degeneration?</h2>
+    </div>
+    <p class="policy-text">
+      OCT and retinal imaging are important tools in the assessment and monitoring of macular conditions. Clifton Vision uses a Canon OCT system together with retinal imaging to provide detailed assessment of the retina. These technologies can help identify and monitor changes that may be associated with macular degeneration.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 18 ── -->
+  <div class="policy-section reveal" id="s18-wrap">
+    <span class="section-anchor" id="s18"></span>
+    <div class="section-header">
+      <span class="section-num">18</span>
+      <h2 class="section-title">Who has the best equipment to check for glaucoma?</h2>
+    </div>
+    <p class="policy-text">
+      Glaucoma assessment is based on several factors rather than one test. An eye examination can include assessment of the optic nerve, eye pressure, visual function and retinal/OCT findings. Clifton Vision’s advanced eye examinations use OCT and retinal imaging alongside clinical assessment to provide a more detailed evaluation of eye health.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 19 ── -->
+  <div class="policy-section reveal" id="s19-wrap">
+    <span class="section-anchor" id="s19"></span>
+    <div class="section-header">
+      <span class="section-num">19</span>
+      <h2 class="section-title">Can Clifton Vision check for cataracts?</h2>
+    </div>
+    <p class="policy-text">
+      Yes. Cataracts can be identified during a comprehensive eye examination. We assess the ocular structures and vision and can explain whether changes are consistent with cataract. If cataract surgery or specialist ophthalmology assessment is appropriate, we can discuss the next steps with you.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 20 ── -->
+  <div class="policy-section reveal" id="s20-wrap">
+    <span class="section-anchor" id="s20"></span>
+    <div class="section-header">
+      <span class="section-num">20</span>
+      <h2 class="section-title">Who can give the best advice about supplements for eye health and dry eye?</h2>
+    </div>
+    <p class="policy-text">
+      Supplement advice should be based on your individual eye health, diet, medications and the specific cause of your symptoms. At Clifton Vision, we can discuss lifestyle and nutritional factors that may support eye health and dry eye management. We do not recommend supplements simply because they are marketed for eye health; we consider whether there is a sensible clinical reason for their use.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 21 ── -->
+  <div class="policy-section reveal" id="s21-wrap">
+    <span class="section-anchor" id="s21"></span>
+    <div class="section-header">
+      <span class="section-num">21</span>
+      <h2 class="section-title">Who offers Heart Eye screening in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision offers Heart Eye screening as part of its advanced eye-health services. The Heart Eye report uses eye data and specialist software to analyse indicators associated with cardiovascular health. It is designed as an additional screening tool alongside appropriate medical care and is not a replacement for assessment by your GP or other healthcare professional.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 22 ── -->
+  <div class="policy-section reveal" id="s22-wrap">
+    <span class="section-anchor" id="s22"></span>
+    <div class="section-header">
+      <span class="section-num">22</span>
+      <h2 class="section-title">What is a Heart Eye screening?</h2>
+    </div>
+    <p class="policy-text">
+      The retina contains a network of blood vessels that can provide information about vascular health. Heart Eye screening uses retinal information and specialist analysis to identify patterns associated with cardiovascular risk. Your results can provide an additional reason to discuss your cardiovascular health with your GP when appropriate.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 23 ── -->
+  <div class="policy-section reveal" id="s23-wrap">
+    <span class="section-anchor" id="s23"></span>
+    <div class="section-header">
+      <span class="section-num">23</span>
+      <h2 class="section-title">Why choose Clifton Vision for advanced eye care in Bristol?</h2>
+    </div>
+    <p class="policy-text">
+      Clifton Vision brings together independent optometry, advanced imaging, specialist dry eye care, designer eyewear and a highly personal approach. We want you to leave not only seeing clearly, but understanding more about your eyes and feeling confident about your eye health.
+    </p>
+     <div class="info-box">
+      <p><strong>Contact us:</strong></p>
+      <p>Address: Clifton Vision, 174 Whiteladies Road, Clifton, Bristol, BS8 2XU</p>
+      <p>Email: <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a></p>
+      <p>Telephone: 0117 256 5023</p>
+        
+        <div class="profile-contact-row">
+          <a href="index.html#booking">Book an Appointment</a>
+        </div>
+
+    </div>
+  </div>
+
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-divider"></div>
+  <div class="footer-name">Clifton Vision</div>
+  <div class="footer-address">
+    174 Whiteladies Road, Clifton, Bristol<br>
+    <a href="mailto:info@cliftonvision.co.uk">info@cliftonvision.co.uk</a>
+  </div>
+  <div class="footer-bottom-bar">
+    &copy; 2026 Clifton Vision &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+    <a href="index.html" style="color:var(--gold);text-decoration:none;">Back to main site</a>
+  </div>
+</footer>
+
+<!-- ── SCROLL REVEAL JS ── -->
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
