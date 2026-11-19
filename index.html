@@ -52,7 +52,7 @@
   .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(201,168,76,.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(21,37,64,.8) 0%, transparent 70%), linear-gradient(160deg, #0d1b2e 0%, #152540 50%, #0d1b2e 100%); }
   .hero-grid { position: absolute; inset: 0; z-index: 0; opacity: .04; background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px); background-size: 60px 60px; }
 
-  .hero-eye-ring { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); width: min(46vw, 540px); height: min(34vw, 400px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(201,168,76,.25); box-shadow: 0 8px 48px rgba(0,0,0,.45); }
+  .hero-eye-ring { position: absolute; right: 4%; top: 50%; transform: translateY(-40%); width: min(46vw, 600px); height: min(34vw, 640px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(201,168,76,.25); box-shadow: 0 8px 48px rgba(0,0,0,.45); }
   @keyframes slowSpin { to { transform: translateY(-50%) rotate(360deg); } }
 
   .hero-content { position: relative; z-index: 1; max-width: 580px; }
@@ -451,7 +451,7 @@
   <div class="hero-eye-ring">
     <img src="Clifton Vision - Display units.png"
          alt="Clifton Vision Display Units"
-         style="width:120%;height:100%;object-fit:cover;border-radius:8px;border:1px solid rgba(201,168,76,.25);box-shadow:0 8px 48px rgba(0,0,0,.45);" />
+         style="width:100%;height:100%;object-fit:fill;border-radius:8px;border:1px solid rgba(201,168,76,.25);box-shadow:0 8px 48px rgba(0,0,0,.45);" />
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
@@ -463,7 +463,7 @@
       <em>crafted for you.</em>
     </h1>
     <p class="hero-p">
-      Bristol's newest independent optician. From comprehensive eye examinations to our curated collection of frames — we see to every detail of your vision and eye health. Our Dry Eye Clinic has already opened and we are accepting new requests. <strong style="color:var(--white);font-weight:500;">Eye Exam appointments are available from November 1st 2026</strong>
+      Bristol's newest independent optician. From comprehensive eye examinations to our curated collection of frames — we see to every detail of your vision and eye health. <strong style="color:var(--white);font-weight:500;">Our Opticians and Dry Eye Clinic is now open. </strong>
     </p>
     
     <div class="hero-actions">
@@ -518,7 +518,7 @@
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2"/><path d="M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/><circle cx="12" cy="12" r="7" stroke-dasharray="2 3"/>
       </svg>
-      <div class="service-title">Lumecca-I</div>
+      <div class="service-title">IPL</div>
       <div class="service-desc">Intense Pulsed Light (IPL) therapy to reduce vascular inflammation and treat dry eye and ocular surface disease. Delivers precise, targeted spot-size treatments for effective, lasting relief.</div>
     </div>
 
@@ -526,7 +526,7 @@
       <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12h8m-4-4v8"/><path d="M6 8c0 0 1.5 2 6 2s6-2 6-2"/><path d="M6 16c0 0 1.5-2 6-2s6 2 6 2"/>
       </svg>
-      <div class="service-title">Forma-I</div>
+      <div class="service-title">RF</div>
       <div class="service-desc">Bipolar Radiofrequency (RF) therapy delivering targeted energy to the delicate periorbital area and meibomian glands. Improves meibum quality for dry eye relief whilst stimulating collagen production to rejuvenate the periorbital area.</div>
     </div>
 
@@ -614,7 +614,7 @@
 <section id="about">
   <div class="about-visual reveal">
     <div class="about-frame"><div class="about-frame-inner" style="padding:0;overflow:hidden;border-radius:2px;">
-      <img src="saleha 3.png">
+      <img src="saleha 5.png">
     </div></div>
     <!-- <div class="about-badge"><div class="about-badge-num">№1</div><div class="about-badge-label">Your Local Optometrist</div> --> </div>
   </div>
@@ -674,17 +674,17 @@
           <select id="apptType" required>
             <option value="" disabled selected>Select a service</option>
             <!-- <option>NHS Eye Examination</option> -->
-            <option>Private Eye Exam (60 min)</option>
-            <option>Contact Lens Fit (30 min)</option>
-            <option>Contact Lens Aftercare (30 min)</option>
-            <option>Children's Eye Exam (30 min)</option>
-            <option>Dry Eye Consultation (45 min)</option>
-            <!-- <option>IPL/RF for Dry Eye (£300 per Treatment)</option> -->
-            <!-- <option>Antimicrobial Eye Clean (£250 per Treatment)</option> -->
-             <option>Heart Eye Retinal Scan & Report </option>
-           <!-- <option>Post-Cataract Consultation</option> -->
+            <option>Private Eye Examination (60 Mins)</option>
+            <option>Contact Lens Fit (30 Mins)</option>
+            <option>Contact Lens Aftercare (30 Mins)</option>
+            <option>Children's Eye Examination (30 Mins)</option>
+            <option>Dry Eye Consultation (45 Mins)</option>
+            <!-- <option>Lumecca-I (IPL Treatment)</option> -->
+            <!-- <option>Forma-I (RF Treatment)</option>  -->
+             <option>HeartEye Retinal Scan and Report</option>
+           <option>Post-Cataract Consultation</option>
             <option>Frame Consultation</option>
-            <option>Clifton Vision Membership Enquiry</option>
+            <option>Eyecare Plan Enquiry</option>
           </select>
         </div>
         <div class="form-group"><label>Preferred Date *</label><input type="date" id="prefDate" required></div>
